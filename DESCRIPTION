@@ -1,0 +1,10 @@
+Package: kyoboLT
+Type: Package
+Title: Useful package for Kyobo
+Version: 0.1.0
+Author: Hyojin Song
+Maintainer: Hyojin Song <lt.lovetoken@gmail.com>
+Description: Unsettled
+License: Unsettled
+LazyData: TRUE
+RoxygenNote: 5.0.1

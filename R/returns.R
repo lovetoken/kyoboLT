@@ -1,27 +1,43 @@
 #' Account X day returns
 #'
 #' Account X day returns
-#' @param data
-#' @param X
-#' @param start.column
+#' @param xts
+#' @param Xday
+#' @param log.returns
 #' @export
 #' @examples
-#' Xday_returns(data, 365, start.column=7)
+#' Xday_returns(xts, 365, log.returns=T)
 
-Xday_returns <- function(data, X, start.column=7){
-  nrow <- dim(data)[1]
-  ncol <- dim(data)[2]
+Xday_returns <- function(xts, Xday=1, log.returns=F){
 
-  returns.dataset <- data
-  returns.dataset[start.column:ncol] <- NA
+  # ready
+  stopifnot(require(dplyr))
+  stopifnot(require(xts))
+  stopifnot(Xday!=0)
 
-  for(j in start.column:ncol){
-    for(i in (1+X):nrow){
-      returns.dataset[i,j] <- data[i,j]/data[i-X,j]-1
+  Xday <- as.integer(Xday)
+  nr <- dim(xts)[1]
+  nc <- dim(xts)[2]
+
+  # content
+  returns <- xts
+  returns[] <- NA
+
+  if(log.returns) {
+
+    returns <- diff(log(xts), lag=Xday)
+
+  } else {
+
+    for(j in seq(nc)){
+      for(i in (1+Xday):nr){
+        returns[i,j] <- coredata(xts[i,j])/coredata(xts[i-X,j])-1
+      }
     }
+
   }
 
-  colnames(returns.dataset)[start.column:ncol] <- paste(colnames(data)[start.column:ncol],
-                                                        "_", X, "DayReturns", sep="")
-  returns.dataset
+  attr(returns, "Xday") <- Xday
+
+  returns
 }

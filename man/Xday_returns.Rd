@@ -4,7 +4,7 @@
 \alias{Xday_returns}
 \title{Account X day returns}
 \usage{
-Xday_returns(data, X, start.column = 7)
+Xday_returns(xts, Xday = 1, log.returns = F)
 }
 \description{
 Account X day returns

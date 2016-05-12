@@ -1,12 +1,12 @@
 Package: kyoboLT
 Type: Package
 Title: Useful package for Kyobo
-Version: 0.11.0
+Version: 0.12.0
 Author: Hyojin Song
 Maintainer: Hyojin Song <lt.lovetoken@gmail.com>
 Description: Useful package for Kyobo in retirement pension marketing team
 Depends: R (>= 3.2)
-Imports: dplyr, xts
+Imports: dplyr, xts, formattable, ggplot2, extrafont
 License: GPL-3
 LazyData: TRUE
 RoxygenNote: 5.0.1

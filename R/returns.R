@@ -31,7 +31,7 @@ Xday_returns <- function(xts, Xday=1, log.returns=F){
 
     for(j in seq(nc)){
       for(i in (1+Xday):nr){
-        returns[i,j] <- coredata(xts[i,j])/coredata(xts[i-X,j])-1
+        returns[i,j] <- coredata(xts[i,j])/coredata(xts[i-Xday,j])-1
       }
     }
 
@@ -41,3 +41,4 @@ Xday_returns <- function(xts, Xday=1, log.returns=F){
 
   returns
 }
+

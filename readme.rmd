@@ -1,0 +1,41 @@
+---
+title: "Readme"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r echo=F, message=FALSE, warning=FALSE}
+library(xts)
+library(formattable)
+library(kyoboLT)
+```
+
+# install `kyoboLT` package
+
+```{r eval=F}
+devtools::install_github("lovetoken/kyoboLT")
+```
+
+# example
+
+## `Xday_returns()` function
+
+```{r message=FALSE, warning=FALSE}
+index <- matrix(rnorm(100,1000, 8^2), 20, 5)
+data <- xts(round(index, 1), as.Date(16001:16020)) # xts package for time series data
+data
+
+Xday_returns(data, Xday=3) # basic 3 day returns
+Xday_returns(data, Xday=3, log.returns = T) # calculation 3 day log returns
+```
+
+## `trim()` function
+
+```{r message=FALSE, warning=FALSE}
+trim("  Wow!  ", method="trailing")
+trim("  Wow!  ", method="leading")
+
+"  Wow!  " %>% trim %>% trim(method="leading")
+```
+

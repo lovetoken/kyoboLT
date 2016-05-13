@@ -8,7 +8,7 @@
 #' @examples
 #' Xday_returns(xts, 365, log.returns=T)
 
-Xday_returns <- function(xts, Xday=1, log.returns=F){
+Xday_returns <- function(xts, Xday=1L, log.returns=F){
 
   # ready
   stopifnot(require(dplyr))
@@ -29,11 +29,7 @@ Xday_returns <- function(xts, Xday=1, log.returns=F){
 
   } else {
 
-    for(j in seq(nc)){
-      for(i in (1+Xday):nr){
-        returns[i,j] <- coredata(xts[i,j])/coredata(xts[i-Xday,j])-1
-      }
-    }
+    returns <- diff(xts, Xday)/apply(xts, 2, function(x) lag(x, Xday))
 
   }
 

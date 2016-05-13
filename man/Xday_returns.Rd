@@ -4,12 +4,12 @@
 \alias{Xday_returns}
 \title{Account X day returns}
 \usage{
-Xday_returns(xts, Xday = 1, log.returns = F)
+Xday_returns(xts, Xday = 1L, log.returns = F)
 }
 \description{
 Account X day returns
 }
 \examples{
-Xday_returns(data, 365, start.column=7)
+Xday_returns(xts, 365, log.returns=T)
 }
 

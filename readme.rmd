@@ -6,7 +6,9 @@ output:
 ---
 
 ```{r echo=F, message=FALSE, warning=FALSE}
+library(dplyr)
 library(xts)
+library(reshape2)
 library(formattable)
 library(kyoboLT)
 ```
@@ -38,5 +40,11 @@ trim("  Wow!  ", method="trailing")
 trim("  Wow!  ", method="leading")
 
 "  Wow!  " %>% trim %>% trim(method="leading")
+```
+
+## `tm_plot` function
+
+```{r message=FALSE, warning=FALSE}
+tm_plot(data, c(2,5,10))
 ```
 

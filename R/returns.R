@@ -19,10 +19,6 @@ Xday_returns <- function(xts, Xday=1L, log.returns=F){
   nr <- dim(xts)[1]
   nc <- dim(xts)[2]
 
-  # content
-  returns <- xts
-  returns[] <- NA
-
   if(log.returns) {
 
     returns <- diff(log(xts), lag=Xday)
@@ -35,6 +31,6 @@ Xday_returns <- function(xts, Xday=1L, log.returns=F){
 
   attr(returns, "Xday") <- Xday
 
+  # return
   returns
 }
-

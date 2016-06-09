@@ -78,13 +78,6 @@ tmplot <- function(xts, mv=c(20, 60, 120), plotly=F, ...){
 #'
 #' tm1plot(data, "KS11.Close")
 
-library("quantmod")
-
-data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
-
-tm1plot(data, "KS11.Close")
-tmplot(data)
-
 tm1plot <- function(xts, choice.stock, mv=c(20, 60, 120), plotly=F, ...){
 
   # pre

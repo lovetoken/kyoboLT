@@ -11,6 +11,9 @@ library(xts)
 library(reshape2)
 library(formattable)
 library(kyoboLT)
+library(knitr)
+
+opts_chunk$set(fig.path='figure/')
 ```
 
 # install `kyoboLT` package
@@ -19,7 +22,7 @@ library(kyoboLT)
 devtools::install_github("lovetoken/kyoboLT")
 ```
 
-# example
+# Useful functions for time series data (using "xts" package)
 
 ## `Xday_returns()` function
 
@@ -29,9 +32,22 @@ data <- xts(round(index, 1), as.Date(16001:16020)) # xts package for time series
 names(data) <- paste("Fund", 1:3, sep="_")
 data
 
-Xday_returns(data, Xday=3) # basic 3 day returns
-Xday_returns(data, Xday=3, log.returns = T) # calculation 3 day log returns
+# basic 3 day returns
+Xday_returns(data, Xday=3)
+# calculation 3 day log returns
+Xday_returns(data, Xday=3, log.returns = T)
 ```
+
+## `tmplot()` function
+
+```{r message=FALSE, warning=FALSE}
+library("quantmod")
+data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
+
+tmplot(data)
+```
+
+# etc functions
 
 ## `trim()` function
 
@@ -41,10 +57,3 @@ trim("  Wow!  ", method="leading")
 
 "  Wow!  " %>% trim %>% trim(method="leading")
 ```
-
-## `tm_plot` function
-
-```{r message=FALSE, warning=FALSE}
-tm_plot(data, c(2,5,10))
-```
-

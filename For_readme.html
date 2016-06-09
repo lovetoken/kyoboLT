@@ -9,7 +9,6 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="date" content="2016-06-09" />
 
 <title>Readme</title>
 
@@ -82,11 +81,12 @@ code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Inf
       <ul>
       <li><a href="#install-kyobolt-package">install <code>kyoboLT</code> package</a></li>
       <li><a href="#useful-functions-for-time-series-data">Useful functions for time series data</a><ul>
-      <li><a href="#xday_returns-function"><code>Xday_returns()</code> function</a></li>
-      <li><a href="#tmplot-function"><code>tmplot()</code> function</a></li>
+      <li><a href="#xday_returns"><code>Xday_returns()</code></a></li>
+      <li><a href="#assess_returns"><code>assess_returns()</code></a></li>
+      <li><a href="#tmplot"><code>tmplot()</code></a></li>
       </ul></li>
       <li><a href="#etc-functions">etc functions</a><ul>
-      <li><a href="#trim-function"><code>trim()</code> function</a></li>
+      <li><a href="#trim"><code>trim()</code></a></li>
       </ul></li>
       </ul>  
     </div>
@@ -99,82 +99,438 @@ code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="useful-functions-for-time-series-data" class="section level1">
 <h1>Useful functions for time series data</h1>
-<div id="xday_returns-function" class="section level2">
-<h2><code>Xday_returns()</code> function</h2>
+<div id="xday_returns" class="section level2">
+<h2><code>Xday_returns()</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">index &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">60</span>,<span class="dv">1000</span>, <span class="dv">8</span>^<span class="dv">2</span>), <span class="dv">20</span>, <span class="dv">3</span>)
 data &lt;-<span class="st"> </span><span class="kw">xts</span>(<span class="kw">round</span>(index, <span class="dv">1</span>), <span class="kw">as.Date</span>(<span class="dv">16001</span>:<span class="dv">16020</span>)) <span class="co"># xts package for time series data</span>
 <span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Fund&quot;</span>, <span class="dv">1</span>:<span class="dv">3</span>, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)
-data</code></pre></div>
-<pre><code>##            Fund_1 Fund_2 Fund_3
-## 2013-10-23 1113.1  891.1  953.5
-## 2013-10-24 1090.9  954.0  928.1
-## 2013-10-25  900.6 1058.2 1057.2
-## 2013-10-26  889.1  932.3  912.1
-## 2013-10-27  942.9  993.3  963.3
-## 2013-10-28 1037.8  929.8 1104.2
-## 2013-10-29 1020.5 1047.4  952.1
-## 2013-10-30 1040.8 1092.6 1129.6
-## 2013-10-31  917.1  930.3  978.9
-## 2013-11-01  968.0  937.3 1069.5
-## 2013-11-02 1047.0  876.9  927.7
-## 2013-11-03 1087.4  996.6 1004.3
-## 2013-11-04 1001.2  996.1 1026.2
-## 2013-11-05 1006.1 1035.4 1054.5
-## 2013-11-06 1056.2  946.3  937.0
-## 2013-11-07  969.2 1055.5 1066.0
-## 2013-11-08 1055.6 1030.9 1070.4
-## 2013-11-09 1042.0  993.4  985.4
-## 2013-11-10 1050.1  950.8  948.8
-## 2013-11-11  928.0  906.6 1023.4</code></pre>
+data %&gt;%<span class="st"> </span>kable</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Fund_1</th>
+<th align="right">Fund_2</th>
+<th align="right">Fund_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1077.7</td>
+<td align="right">981.8</td>
+<td align="right">1042.1</td>
+</tr>
+<tr class="even">
+<td align="right">963.5</td>
+<td align="right">985.5</td>
+<td align="right">1031.7</td>
+</tr>
+<tr class="odd">
+<td align="right">1101.3</td>
+<td align="right">996.0</td>
+<td align="right">1052.7</td>
+</tr>
+<tr class="even">
+<td align="right">996.7</td>
+<td align="right">901.0</td>
+<td align="right">1019.7</td>
+</tr>
+<tr class="odd">
+<td align="right">1085.9</td>
+<td align="right">980.4</td>
+<td align="right">970.7</td>
+</tr>
+<tr class="even">
+<td align="right">945.7</td>
+<td align="right">864.4</td>
+<td align="right">1004.6</td>
+</tr>
+<tr class="odd">
+<td align="right">990.1</td>
+<td align="right">1080.6</td>
+<td align="right">1006.2</td>
+</tr>
+<tr class="even">
+<td align="right">1079.9</td>
+<td align="right">979.0</td>
+<td align="right">979.8</td>
+</tr>
+<tr class="odd">
+<td align="right">976.1</td>
+<td align="right">972.9</td>
+<td align="right">972.7</td>
+</tr>
+<tr class="even">
+<td align="right">1032.0</td>
+<td align="right">990.4</td>
+<td align="right">951.9</td>
+</tr>
+<tr class="odd">
+<td align="right">926.5</td>
+<td align="right">954.6</td>
+<td align="right">969.0</td>
+</tr>
+<tr class="even">
+<td align="right">1042.7</td>
+<td align="right">931.8</td>
+<td align="right">975.6</td>
+</tr>
+<tr class="odd">
+<td align="right">1051.0</td>
+<td align="right">984.6</td>
+<td align="right">1036.1</td>
+</tr>
+<tr class="even">
+<td align="right">1044.2</td>
+<td align="right">993.9</td>
+<td align="right">1109.4</td>
+</tr>
+<tr class="odd">
+<td align="right">971.4</td>
+<td align="right">1039.5</td>
+<td align="right">935.2</td>
+</tr>
+<tr class="even">
+<td align="right">857.0</td>
+<td align="right">1003.5</td>
+<td align="right">1018.1</td>
+</tr>
+<tr class="odd">
+<td align="right">1010.9</td>
+<td align="right">944.2</td>
+<td align="right">1054.4</td>
+</tr>
+<tr class="even">
+<td align="right">1036.0</td>
+<td align="right">974.8</td>
+<td align="right">861.0</td>
+</tr>
+<tr class="odd">
+<td align="right">1011.9</td>
+<td align="right">1017.1</td>
+<td align="right">967.6</td>
+</tr>
+<tr class="even">
+<td align="right">981.3</td>
+<td align="right">1009.4</td>
+<td align="right">988.9</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># basic 3 day returns</span>
-<span class="kw">Xday_returns</span>(data, <span class="dt">Xday=</span><span class="dv">3</span>)</code></pre></div>
-<pre><code>##                  Fund_1        Fund_2      Fund_3
-## 2013-10-23           NA            NA          NA
-## 2013-10-24           NA            NA          NA
-## 2013-10-25           NA            NA          NA
-## 2013-10-26 -0.201239781  0.0462349905 -0.04341898
-## 2013-10-27 -0.135667797  0.0411949686  0.03792695
-## 2013-10-28  0.152342883 -0.1213381213  0.04445706
-## 2013-10-29  0.147789900  0.1234581143  0.04385484
-## 2013-10-30  0.103828614  0.0999697976  0.17263573
-## 2013-10-31 -0.116303719  0.0005377501 -0.11347582
-## 2013-11-01 -0.051445370 -0.1051174336  0.12330638
-## 2013-11-02  0.005956956 -0.1974190005 -0.17873584
-## 2013-11-03  0.185694036  0.0712673331  0.02594749
-## 2013-11-04  0.034297521  0.0627333831 -0.04048621
-## 2013-11-05 -0.039063992  0.1807503706  0.13668212
-## 2013-11-06 -0.028692294 -0.0504716035 -0.06701185
-## 2013-11-07 -0.031961646  0.0596325670  0.03878386
-## 2013-11-08  0.049199881 -0.0043461464  0.01507824
-## 2013-11-09 -0.013444423  0.0497727993  0.05165422
-## 2013-11-10  0.083470904 -0.0991946945 -0.10994371
-## 2013-11-11 -0.120879121 -0.1205742555 -0.04390882</code></pre>
+<span class="kw">Xday_returns</span>(data, <span class="dt">Xday=</span><span class="dv">3</span>) %&gt;%<span class="st"> </span>kable</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Fund_1</th>
+<th align="right">Fund_2</th>
+<th align="right">Fund_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">-0.075160063</td>
+<td align="right">-0.082297820</td>
+<td align="right">-0.021495058</td>
+</tr>
+<tr class="odd">
+<td align="right">0.127036845</td>
+<td align="right">-0.005175038</td>
+<td align="right">-0.059125715</td>
+</tr>
+<tr class="even">
+<td align="right">-0.141287569</td>
+<td align="right">-0.132128514</td>
+<td align="right">-0.045692030</td>
+</tr>
+<tr class="odd">
+<td align="right">-0.006621852</td>
+<td align="right">0.199334073</td>
+<td align="right">-0.013239188</td>
+</tr>
+<tr class="even">
+<td align="right">-0.005525371</td>
+<td align="right">-0.001427989</td>
+<td align="right">0.009374678</td>
+</tr>
+<tr class="odd">
+<td align="right">0.032145501</td>
+<td align="right">0.125520592</td>
+<td align="right">-0.031753932</td>
+</tr>
+<tr class="even">
+<td align="right">0.042318958</td>
+<td align="right">-0.083472145</td>
+<td align="right">-0.053965414</td>
+</tr>
+<tr class="odd">
+<td align="right">-0.142050190</td>
+<td align="right">-0.024923391</td>
+<td align="right">-0.011022658</td>
+</tr>
+<tr class="even">
+<td align="right">0.068230714</td>
+<td align="right">-0.042244835</td>
+<td align="right">0.002981392</td>
+</tr>
+<tr class="odd">
+<td align="right">0.018410853</td>
+<td align="right">-0.005856220</td>
+<td align="right">0.088454670</td>
+</tr>
+<tr class="even">
+<td align="right">0.127037237</td>
+<td align="right">0.041169076</td>
+<td align="right">0.144891641</td>
+</tr>
+<tr class="odd">
+<td align="right">-0.068380167</td>
+<td align="right">0.115582743</td>
+<td align="right">-0.041410414</td>
+</tr>
+<tr class="even">
+<td align="right">-0.184586108</td>
+<td align="right">0.019195612</td>
+<td align="right">-0.017372840</td>
+</tr>
+<tr class="odd">
+<td align="right">-0.031890442</td>
+<td align="right">-0.050005031</td>
+<td align="right">-0.049576348</td>
+</tr>
+<tr class="even">
+<td align="right">0.066501956</td>
+<td align="right">-0.062241462</td>
+<td align="right">-0.079341317</td>
+</tr>
+<tr class="odd">
+<td align="right">0.180746791</td>
+<td align="right">0.013552566</td>
+<td align="right">-0.049602200</td>
+</tr>
+<tr class="even">
+<td align="right">-0.029280839</td>
+<td align="right">0.069053167</td>
+<td align="right">-0.062120637</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculation 3 day log returns</span>
-<span class="kw">Xday_returns</span>(data, <span class="dt">Xday=</span><span class="dv">3</span>, <span class="dt">log.returns =</span> T)</code></pre></div>
-<pre><code>##                  Fund_1        Fund_2      Fund_3
-## 2013-10-23           NA            NA          NA
-## 2013-10-24           NA            NA          NA
-## 2013-10-25           NA            NA          NA
-## 2013-10-26 -0.224694479  0.0451979967 -0.04438979
-## 2013-10-27 -0.145798090  0.0403690618  0.03722540
-## 2013-10-28  0.141797159 -0.1293551212  0.04349719
-## 2013-10-29  0.137838267  0.1164115305  0.04292044
-## 2013-10-30  0.098784695  0.0952827227  0.15925398
-## 2013-10-31 -0.123641849  0.0005376055 -0.12044688
-## 2013-11-01 -0.052815895 -0.1110627801  0.11627646
-## 2013-11-02  0.005939284 -0.2199224952 -0.19691046
-## 2013-11-03  0.170328287  0.0688423711  0.02561657
-## 2013-11-04  0.033722472  0.0608442524 -0.04132859
-## 2013-11-05 -0.039847462  0.1661501437  0.12811360
-## 2013-11-06 -0.029111964 -0.0517898423 -0.06936278
-## 2013-11-07 -0.032483571  0.0579222131  0.03805067
-## 2013-11-08  0.048027855 -0.0043556184  0.01496569
-## 2013-11-09 -0.013535618  0.0485737592  0.05036437
-## 2013-11-10  0.080169688 -0.1044661318 -0.11647058
-## 2013-11-11 -0.128832872 -0.1284861476 -0.04490199</code></pre>
+<span class="kw">Xday_returns</span>(data, <span class="dt">Xday=</span><span class="dv">3</span>, <span class="dt">log.returns =</span> T) %&gt;%<span class="st"> </span>kable</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Fund_1</th>
+<th align="right">Fund_2</th>
+<th align="right">Fund_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">-0.078134598</td>
+<td align="right">-0.085882364</td>
+<td align="right">-0.021729442</td>
+</tr>
+<tr class="odd">
+<td align="right">0.119591927</td>
+<td align="right">-0.005188475</td>
+<td align="right">-0.060945745</td>
+</tr>
+<tr class="even">
+<td align="right">-0.152321185</td>
+<td align="right">-0.141711633</td>
+<td align="right">-0.046768840</td>
+</tr>
+<tr class="odd">
+<td align="right">-0.006643874</td>
+<td align="right">0.181766464</td>
+<td align="right">-0.013327607</td>
+</tr>
+<tr class="even">
+<td align="right">-0.005540692</td>
+<td align="right">-0.001429009</td>
+<td align="right">0.009331008</td>
+</tr>
+<tr class="odd">
+<td align="right">0.031639646</td>
+<td align="right">0.118245677</td>
+<td align="right">-0.032269021</td>
+</tr>
+<tr class="even">
+<td align="right">0.041447998</td>
+<td align="right">-0.087162819</td>
+<td align="right">-0.055476151</td>
+</tr>
+<tr class="odd">
+<td align="right">-0.153209678</td>
+<td align="right">-0.025239238</td>
+<td align="right">-0.011083857</td>
+</tr>
+<tr class="even">
+<td align="right">0.066003742</td>
+<td align="right">-0.043163103</td>
+<td align="right">0.002976956</td>
+</tr>
+<tr class="odd">
+<td align="right">0.018243425</td>
+<td align="right">-0.005873435</td>
+<td align="right">0.084758956</td>
+</tr>
+<tr class="even">
+<td align="right">0.119592275</td>
+<td align="right">0.040344193</td>
+<td align="right">0.135309996</td>
+</tr>
+<tr class="odd">
+<td align="right">-0.070830452</td>
+<td align="right">0.109376908</td>
+<td align="right">-0.042292256</td>
+</tr>
+<tr class="even">
+<td align="right">-0.204059452</td>
+<td align="right">0.019013701</td>
+<td align="right">-0.017525519</td>
+</tr>
+<tr class="odd">
+<td align="right">-0.032410019</td>
+<td align="right">-0.051298590</td>
+<td align="right">-0.050847444</td>
+</tr>
+<tr class="even">
+<td align="right">0.064384093</td>
+<td align="right">-0.064262786</td>
+<td align="right">-0.082665906</td>
+</tr>
+<tr class="odd">
+<td align="right">0.166147112</td>
+<td align="right">0.013461551</td>
+<td align="right">-0.050874645</td>
+</tr>
+<tr class="even">
+<td align="right">-0.029718079</td>
+<td align="right">0.066773366</td>
+<td align="right">-0.064133949</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="tmplot-function" class="section level2">
-<h2><code>tmplot()</code> function</h2>
+<div id="assess_returns" class="section level2">
+<h2><code>assess_returns()</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">returns &lt;-<span class="st"> </span><span class="kw">Xday_returns</span>(data, <span class="dt">Xday=</span><span class="dv">3</span>, <span class="dt">log.returns =</span> T)
+
+<span class="kw">assess_returns</span>(returns, <span class="st">&quot;mean&quot;</span>) %&gt;%<span class="st"> </span>kable</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Rank</th>
+<th align="left">Names</th>
+<th align="right">mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Fund_2</td>
+<td align="right">0.22%</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Fund_1</td>
+<td align="right">-0.62%</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Fund_3</td>
+<td align="right">-1.87%</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">assess_returns</span>(returns, <span class="st">&quot;sd&quot;</span>) %&gt;%<span class="st"> </span>kable</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Rank</th>
+<th align="left">Names</th>
+<th align="right">sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Fund_3</td>
+<td align="right">5.52%</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Fund_2</td>
+<td align="right">8.29%</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Fund_1</td>
+<td align="right">10.26%</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">assess_returns</span>(returns, <span class="st">&quot;S.R&quot;</span>) %&gt;%<span class="st"> </span>kable</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Rank</th>
+<th align="left">Names</th>
+<th align="right">S.R</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Fund_2</td>
+<td align="right">2.68%</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Fund_1</td>
+<td align="right">-6.06%</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Fund_3</td>
+<td align="right">-33.87%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tmplot" class="section level2">
+<h2><code>tmplot()</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;quantmod&quot;</span>)
 data &lt;-<span class="st"> </span><span class="kw">getSymbols</span>(<span class="st">&quot;^ks11&quot;</span>, <span class="dt">from=</span><span class="kw">Sys.Date</span>()-<span class="dv">1000</span>, <span class="dt">to=</span><span class="kw">Sys.Date</span>(), <span class="dt">auto.assign=</span>F)
 
@@ -184,8 +540,8 @@ data &lt;-<span class="st"> </span><span class="kw">getSymbols</span>(<span clas
 </div>
 <div id="etc-functions" class="section level1">
 <h1>etc functions</h1>
-<div id="trim-function" class="section level2">
-<h2><code>trim()</code> function</h2>
+<div id="trim" class="section level2">
+<h2><code>trim()</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trim</span>(<span class="st">&quot;  Wow!  &quot;</span>, <span class="dt">method=</span><span class="st">&quot;trailing&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;  Wow!&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trim</span>(<span class="st">&quot;  Wow!  &quot;</span>, <span class="dt">method=</span><span class="st">&quot;leading&quot;</span>)</code></pre></div>
@@ -200,7 +556,6 @@ data &lt;-<span class="st"> </span><span class="kw">getSymbols</span>(<span clas
 </div>
 
 <div id="postamble" data-toggle="wy-nav-shift" class="status">
-<p class="date"><span class="glyphicon glyphicon-calendar"></span> 2016-06-09</p>
 </div>
 
 

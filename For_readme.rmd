@@ -15,7 +15,7 @@ library(formattable)
 library(kyoboLT)
 library(knitr)
 
-opts_chunk$set(fig.path='figure/', fig.align="center")
+opts_chunk$set(fig.path='figure/', fig.align="center", message=FALSE, warning=FALSE)
 ```
 
 # install `kyoboLT` package
@@ -26,23 +26,33 @@ devtools::install_github("lovetoken/kyoboLT")
 
 # Useful functions for time series data
 
-## `Xday_returns()` function
+## `Xday_returns()`
 
-```{r message=FALSE, warning=FALSE}
+```{r}
 index <- matrix(rnorm(60,1000, 8^2), 20, 3)
 data <- xts(round(index, 1), as.Date(16001:16020)) # xts package for time series data
 names(data) <- paste("Fund", 1:3, sep="_")
-data
+data %>% kable
 
 # basic 3 day returns
-Xday_returns(data, Xday=3)
+Xday_returns(data, Xday=3) %>% kable
 # calculation 3 day log returns
-Xday_returns(data, Xday=3, log.returns = T)
+Xday_returns(data, Xday=3, log.returns = T) %>% kable
 ```
 
-## `tmplot()` function
+## `assess_returns()`
 
-```{r message=FALSE, warning=FALSE}
+```{r}
+returns <- Xday_returns(data, Xday=3, log.returns = T)
+
+assess_returns(returns, "mean") %>% kable
+assess_returns(returns, "sd") %>% kable
+assess_returns(returns, "S.R") %>% kable
+```
+
+## `tmplot()`
+
+```{r}
 library("quantmod")
 data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
 
@@ -51,9 +61,9 @@ tmplot(data)
 
 # etc functions
 
-## `trim()` function
+## `trim()`
 
-```{r message=FALSE, warning=FALSE}
+```{r}
 trim("  Wow!  ", method="trailing")
 trim("  Wow!  ", method="leading")
 

@@ -10,11 +10,9 @@ tmplot(xts, mv = c(20, 60, 120), plotly = F, ...)
 ts and moving average plot for all fund items
 }
 \examples{
-set.seed(1004)
-index <- matrix(rnorm(3000, 1000, 5^2), 1000, 3)
-data <- xts(round(index, 1), as.Date(16001:17000))
-names(data) <- paste("Fund", 1:3, sep="_")
-data
+library("quantmod")
+
+data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
 
 tmplot(data)
 tmplot(data, plotly=T)

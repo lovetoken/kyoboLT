@@ -6,11 +6,9 @@
 #' @param plotly
 #' @export
 #' @examples
-#' set.seed(1004)
-#' index <- matrix(rnorm(3000, 1000, 5^2), 1000, 3)
-#' data <- xts(round(index, 1), as.Date(16001:17000))
-#' names(data) <- paste("Fund", 1:3, sep="_")
-#' data
+#' library("quantmod")
+#'
+#' data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
 #'
 #' tmplot(data)
 #' tmplot(data, plotly=T)
@@ -18,17 +16,11 @@
 tmplot <- function(xts, mv=c(20, 60, 120), plotly=F, ...){
 
   # pre
-  stopifnot(require(dplyr))
-  stopifnot(require(xts))
-  stopifnot(require(ggplot2))
-  stopifnot(require(plotly))
-  stopifnot(require(reshape2))
+  stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(ggplot2)); stopifnot(require(plotly)); stopifnot(require(reshape2))
   stopifnot(is.numeric(mv))
 
   mv <- as.integer(mv)
-  mv1 <- mv[1]
-  mv2 <- mv[2]
-  mv3 <- mv[3]
+  mv1 <- mv[1]; mv2 <- mv[2]; mv3 <- mv[3]
 
   # content
   PD1_1 <- xts %>%
@@ -59,12 +51,12 @@ tmplot <- function(xts, mv=c(20, 60, 120), plotly=F, ...){
     left_join(PD1_4)
 
   P <- ggplot(PD1, aes(x=Index)) +
-    geom_line(col="blue", aes(y=moving_average_3), stat="identity", alpha=.4) +
-    geom_line(col="red", aes(y=moving_average_2), stat="identity", alpha=.4) +
-    geom_line(col="green", aes(y=moving_average_1), stat="identity", alpha=.4) +
-    geom_line(aes(y=value), stat="identity") +
-    facet_grid(variable ~ ., ...) +
-    theme_bw() + ylab("") + xlab("") + ggtitle("Moving average time series plot")
+    geom_line(col="grey", aes(y=value), stat="identity", size=.8) +
+    geom_line(col="purple", aes(y=moving_average_1), stat="identity") +
+    geom_line(col="blue", aes(y=moving_average_2), stat="identity") +
+    geom_line(col="red", aes(y=moving_average_3), stat="identity") +
+    facet_grid(variable ~ ., scales="free", ...) +
+    theme_bw() + ylab("") + xlab("")
 
   # return
   if(plotly) ggplotly(P) else P
@@ -80,25 +72,27 @@ tmplot <- function(xts, mv=c(20, 60, 120), plotly=F, ...){
 #' @param plotly
 #' @export
 #' @examples
-#' set.seed(1004)
-#' index <- matrix(rnorm(3000, 1000, 5^2), 1000, 3)
-#' data <- xts(round(index, 1), as.Date(16001:17000))
-#' names(data) <- paste("Fund", 1:3, sep="_")
-#' data
+#' library("quantmod")
 #'
-#' tm1plot(data, "Fund1")
-#' tm1plot(data, "Fund1", plotly=T)
+#' data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
+#'
+#' tm1plot(data, "KS11.Close")
 
-tm1plot <- function(xts, choice.stock, mv=c(20, 60, 120), plotly=F){
+library("quantmod")
+
+data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
+
+tm1plot(data, "KS11.Close")
+tmplot(data)
+
+tm1plot <- function(xts, choice.stock, mv=c(20, 60, 120), plotly=F, ...){
 
   # pre
-  stopifnot(require(dplyr))
-  stopifnot(require(xts))
-  stopifnot(require(ggplot2))
-  stopifnot(require(plotly))
-  stopifnot(require(reshape2))
-  stopifnot(is.character(choice.stock))
-  stopifnot(is.numeric(mv))
+  stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(ggplot2)); stopifnot(require(plotly)); stopifnot(require(reshape2))
+  stopifnot(is.character(choice.stock)); stopifnot(is.numeric(mv))
+
+  mv <- as.integer(mv)
+  mv1 <- mv[1]; mv2 <- mv[2]; mv3 <- mv[3]
 
   # content
   ## subset dataset
@@ -113,31 +107,28 @@ tm1plot <- function(xts, choice.stock, mv=c(20, 60, 120), plotly=F){
     theme(axis.text.x=element_text(angle=90))
 
   ## moving average line
-  movD.20 <- D[-1]
-  for(n in seq(nrow(D))){
-    movD.20[n,] <- sapply(
-      D[moving.trim(mv[1], n, end=nrow(D)),], mean, na.rm=T)[-1]
-  }
-  PmovD.20 <- melt(cbind(movD.20, D[1]), id=length(cbind(movD.20, D[1])))
+  PD1_1 <- subset(xts, select=choice.stock) %>%
+    rollmean(k=mv1, na.pad=T, align="right") %>%
+    coredata %>%
+    data.frame(date=index(xts)) %>%
+    melt(id="date", value.name="moving_average_1")
 
-  movD.60 <- D[-1]
-  for(n in seq(nrow(D))){
-    movD.60[n,] <- sapply(
-      D[moving.trim(mv[2], n, end=nrow(D)),], mean, na.rm=T)[-1]
-  }
-  PmovD.60 <- melt(cbind(movD.60, D[1]), id=length(cbind(movD.60, D[1])))
+  PD1_2 <- subset(xts, select=choice.stock) %>%
+    rollmean(k=mv2, na.pad=T, align="right") %>%
+    coredata %>%
+    data.frame(date=index(xts)) %>%
+    melt(id="date", value.name="moving_average_2")
 
-  movD.120 <- D[-1]
-  for(n in seq(nrow(D))){
-    movD.120[n,] <- sapply(
-      D[moving.trim(mv[3], n, end=nrow(D)),], mean, na.rm=T)[-1]
-  }
-  PmovD.120 <- melt(cbind(movD.120, D[1]), id=length(cbind(movD.120, D[1])))
+  PD1_3 <- subset(xts, select=choice.stock) %>%
+    rollmean(k=mv3, na.pad=T, align="right") %>%
+    coredata %>%
+    data.frame(date=index(xts)) %>%
+    melt(id="date", value.name="moving_average_3")
 
-  P <- P + geom_line(data=PmovD.20, color="purple") +
-    geom_line(data=PmovD.60, color="blue") +
-    geom_line(data=PmovD.120, color="red") +
-    facet_grid(. ~ variable) + guides(fill=F)
+  P <- P + geom_line(data=PD1_1, aes(y=moving_average_1), color="purple") +
+    geom_line(data=PD1_2, aes(y=moving_average_2), color="blue") +
+    geom_line(data=PD1_3, aes(y=moving_average_3), color="red") +
+    facet_grid(. ~ variable, scales="free", ...) + guides(fill=F)
 
   # return
   if(plotly) ggplotly(P) else P

@@ -5,6 +5,7 @@ output:
   rmdformats::readthedown:
     fig_height: 7
     fig_width: 7
+    keep_md: yes
 ---
 
 ```{r echo=F, message=FALSE, warning=FALSE}

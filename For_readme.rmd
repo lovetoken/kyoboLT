@@ -1,6 +1,5 @@
 ---
 title: "Readme"
-date: "`r Sys.Date()`"
 output:
   rmdformats::readthedown:
     fig_height: 7

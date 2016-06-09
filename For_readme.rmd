@@ -32,12 +32,12 @@ devtools::install_github("lovetoken/kyoboLT")
 index <- matrix(rnorm(60,1000, 8^2), 20, 3)
 data <- xts(round(index, 1), as.Date(16001:16020)) # xts package for time series data
 names(data) <- paste("Fund", 1:3, sep="_")
-data %>% kable
+data
 
 # basic 3 day returns
-Xday_returns(data, Xday=3) %>% kable
+Xday_returns(data, Xday=3)
 # calculation 3 day log returns
-Xday_returns(data, Xday=3, log.returns = T) %>% kable
+Xday_returns(data, Xday=3, log.returns = T)
 ```
 
 ## `assess_returns()`
@@ -45,9 +45,9 @@ Xday_returns(data, Xday=3, log.returns = T) %>% kable
 ```{r}
 returns <- Xday_returns(data, Xday=3, log.returns = T)
 
-assess_returns(returns, "mean") %>% kable
-assess_returns(returns, "sd") %>% kable
-assess_returns(returns, "S.R") %>% kable
+assess_returns(returns, "mean")
+assess_returns(returns, "sd")
+assess_returns(returns, "S.R")
 ```
 
 ## `tmplot()`

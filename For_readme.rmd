@@ -1,8 +1,10 @@
 ---
 title: "Readme"
-output: 
-  html_document: 
-    keep_md: yes
+date: "`r Sys.Date()`"
+output:
+  rmdformats::readthedown:
+    fig_height: 7
+    fig_width: 7
 ---
 
 ```{r echo=F, message=FALSE, warning=FALSE}
@@ -13,7 +15,7 @@ library(formattable)
 library(kyoboLT)
 library(knitr)
 
-opts_chunk$set(fig.path='figure/')
+opts_chunk$set(fig.path='figure/', fig.align="center")
 ```
 
 # install `kyoboLT` package
@@ -22,7 +24,7 @@ opts_chunk$set(fig.path='figure/')
 devtools::install_github("lovetoken/kyoboLT")
 ```
 
-# Useful functions for time series data (using "xts" package)
+# Useful functions for time series data
 
 ## `Xday_returns()` function
 

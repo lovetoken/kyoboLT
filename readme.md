@@ -113,7 +113,7 @@ data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
 tmplot(data)
 ```
 
-![](figure/unnamed-chunk-4-1.png)<!-- -->
+![](figure/unnamed-chunk-4-1.png)
 
 # etc functions
 

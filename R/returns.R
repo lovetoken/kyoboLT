@@ -14,9 +14,8 @@
 
 Xday_returns <- function(xts, Xday=1L, log.returns=F){
 
-  # ready
-  stopifnot(require(dplyr))
-  stopifnot(require(xts))
+  # pre
+  stopifnot(require(dplyr)); stopifnot(require(xts))
   stopifnot(Xday!=0)
 
   Xday <- as.integer(Xday)

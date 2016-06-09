@@ -9,9 +9,9 @@
 #' trim("  Wow!  ", method="trailing")
 
 trim <- function(data, method="trailing"){
+
   # pre
-  stopifnot(is.character(data))
-  stopifnot(method %in% c("leading", "trailing"))
+  stopifnot(is.character(data)); stopifnot(method %in% c("leading", "trailing"))
 
   # content
   if(method=="leading"){
@@ -24,5 +24,7 @@ trim <- function(data, method="trailing"){
 
   }
 
-  return(res)
+  # return
+  res
+
 }

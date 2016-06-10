@@ -1,9 +1,10 @@
 #' Account X day returns
 #'
 #' Account X day returns
-#' @param xts
-#' @param Xday
-#' @param log.returns
+#' @param xts an \code{xts} object
+#' @param Xday an integer value
+#' @param log.returns logical asking whether to calculate log returns
+#' @return xts type about returns dataset
 #' @export
 #' @examples
 #' index <- matrix(rnorm(60,1000, 8^2), 20, 3)

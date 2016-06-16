@@ -6,6 +6,16 @@
 \usage{
 Xday_returns(xts, Xday = 1L, log.returns = F)
 }
+\arguments{
+\item{xts}{an \code{xts} object}
+
+\item{Xday}{an integer value}
+
+\item{log.returns}{logical asking whether to calculate log returns}
+}
+\value{
+xts type about returns dataset
+}
 \description{
 Account X day returns
 }

@@ -123,7 +123,8 @@ tm1plot <- function(xts, choice.stock, mv=c(20, 60, 120), plotly=F, ...){
   P <- P + geom_line(data=PD1_1, aes(y=moving_average_1), color="purple") +
     geom_line(data=PD1_2, aes(y=moving_average_2), color="blue") +
     geom_line(data=PD1_3, aes(y=moving_average_3), color="red") +
-    facet_grid(. ~ variable, scales="free", ...) + guides(fill=F)
+    facet_grid(. ~ variable, scales="free", ...) +
+    guides(fill=F) + ylab("") + xlab("")
 
   # return
   if(plotly) ggplotly(P) else P

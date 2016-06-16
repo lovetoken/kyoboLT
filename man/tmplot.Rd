@@ -6,8 +6,20 @@
 \usage{
 tmplot(xts, mv = c(20, 60, 120), plotly = F, ...)
 }
+\arguments{
+\item{xts}{an \code{xts} object}
+
+\item{mv}{moving average parameters}
+
+\item{plotly}{logical asking whether to using plotly class plotting}
+
+\item{...}{additional parameters passed to \code{facet_grid()}}
+}
+\value{
+\code{plotly} If TRUE, plotly class ploting. else ggplot2 class ploting. Default value is FALSE
+}
 \description{
-ts and moving average plot for all fund items
+ts and (three lines) moving average plot for all fund items
 }
 \examples{
 library("quantmod")

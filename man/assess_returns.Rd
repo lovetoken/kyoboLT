@@ -6,6 +6,14 @@
 \usage{
 assess_returns(returns.xts, method = c("mean", "sd", "S.R"), ...)
 }
+\arguments{
+\item{returns.xts}{an \code{xts} object about returns dataset}
+
+\item{method}{returns mean or sd or Sharpe ratio}
+}
+\value{
+data.frame type about assessment result
+}
 \description{
 Assess funds using returns xts dataset
 }

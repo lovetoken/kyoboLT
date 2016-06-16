@@ -1,9 +1,11 @@
 #' ts and moving average plot for all fund items
 #'
-#' ts and moving average plot for all fund items
-#' @param xts
-#' @param mv
-#' @param plotly
+#' ts and (three lines) moving average plot for all fund items
+#' @param xts an \code{xts} object
+#' @param mv moving average parameters
+#' @param plotly logical asking whether to using plotly class plotting
+#' @param ... additional parameters passed to \code{facet_grid()}
+#' @return \code{plotly} If TRUE, plotly class ploting. else ggplot2 class ploting. Default value is FALSE
 #' @export
 #' @examples
 #' library("quantmod")

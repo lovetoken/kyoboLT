@@ -1,8 +1,9 @@
 #' Assess funds using returns xts dataset
 #'
 #' Assess funds using returns xts dataset
-#' @param returns.xts
-#' @param method
+#' @param returns.xts an \code{xts} object about returns dataset
+#' @param method returns mean or sd or Sharpe ratio
+#' @return data.frame type about assessment result
 #' @export
 #' @examples
 #' index <- matrix(rnorm(60,1000, 8^2), 20, 3)

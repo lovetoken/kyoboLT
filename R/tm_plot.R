@@ -29,19 +29,19 @@ tmplot <- function(xts, mv=c(20, 60, 120), plotly=F, ...){
     melt(id="Index")
 
   PD1_2 <- xts %>%
-    rollmean(k=mv1, na.pad=T, align="right") %>%
+    rollapplyr(mv1, function(x) mean(x, na.rm=T), na.pad=T) %>%
     coredata %>%
     data.frame(Index=index(xts)) %>%
     melt(id="Index", value.name="moving_average_1")
 
   PD1_3 <- xts %>%
-    rollmean(k=mv2, na.pad=T, align="right") %>%
+    rollapplyr(mv2, function(x) mean(x, na.rm=T), na.pad=T) %>%
     coredata %>%
     data.frame(Index=index(xts)) %>%
     melt(id="Index", value.name="moving_average_2")
 
   PD1_4 <- xts %>%
-    rollmean(k=mv3, na.pad=T, align="right") %>%
+    rollapplyr(mv3, function(x) mean(x, na.rm=T), na.pad=T) %>%
     coredata %>%
     data.frame(Index=index(xts)) %>%
     melt(id="Index", value.name="moving_average_3")
@@ -76,7 +76,7 @@ tmplot <- function(xts, mv=c(20, 60, 120), plotly=F, ...){
 #'
 #' data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
 #'
-#' tm1plot(data, "KS11.Close")
+#' tm1plot(data, "KS11.Close", plotly=T)
 
 tm1plot <- function(xts, choice.stock, mv=c(20, 60, 120), plotly=F, ...){
 
@@ -101,19 +101,19 @@ tm1plot <- function(xts, choice.stock, mv=c(20, 60, 120), plotly=F, ...){
 
   ## moving average line
   PD1_1 <- subset(xts, select=choice.stock) %>%
-    rollmean(k=mv1, na.pad=T, align="right") %>%
+    rollapplyr(mv1, function(x) mean(x, na.rm=T), na.pad=T) %>%
     coredata %>%
     data.frame(date=index(xts)) %>%
     melt(id="date", value.name="moving_average_1")
 
   PD1_2 <- subset(xts, select=choice.stock) %>%
-    rollmean(k=mv2, na.pad=T, align="right") %>%
+    rollapplyr(mv2, function(x) mean(x, na.rm=T), na.pad=T) %>%
     coredata %>%
     data.frame(date=index(xts)) %>%
     melt(id="date", value.name="moving_average_2")
 
   PD1_3 <- subset(xts, select=choice.stock) %>%
-    rollmean(k=mv3, na.pad=T, align="right") %>%
+    rollapplyr(mv3, function(x) mean(x, na.rm=T), na.pad=T) %>%
     coredata %>%
     data.frame(date=index(xts)) %>%
     melt(id="date", value.name="moving_average_3")

@@ -25,7 +25,7 @@ assess_returns <- function(returns.xts, method=c("mean", "sd", "S.R"), ...){
     listup <- sort(sapply(returns.xts, mean, na.rm=T), decreasing = T)
     res <- data.frame(Rank=seq(length(listup)),
                       Names=names(listup),
-                      mean=as.numeric(listup) %>% percent(...))
+                      Value=as.numeric(listup) %>% percent(...))
 
   }
 
@@ -34,7 +34,7 @@ assess_returns <- function(returns.xts, method=c("mean", "sd", "S.R"), ...){
     listup <- sort(sapply(returns.xts, sd, na.rm=T), decreasing = F)
     res <- data.frame(Rank=seq(length(listup)),
                       Names=names(listup),
-                      sd=as.numeric(listup) %>% percent(...))
+                      Value=as.numeric(listup) %>% percent(...))
 
   }
 
@@ -45,7 +45,7 @@ assess_returns <- function(returns.xts, method=c("mean", "sd", "S.R"), ...){
     )
     res <- data.frame(Rank=seq(length(listup)),
                       Names=names(listup),
-                      S.R=as.numeric(listup) %>% percent(...))
+                      Value=as.numeric(listup) %>% percent(...))
 
   }
 

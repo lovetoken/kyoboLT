@@ -2,6 +2,7 @@
 
 export(Xday_returns)
 export(assess_returns)
+export(mvp)
 export(tm1plot)
 export(tmplot)
 export(trim)

@@ -60,6 +60,12 @@ tmplot(data)
 tm1plot(data, "KS11.Close")
 ```
 
+## `mvp()`
+
+```{r}
+mvp(returns)
+```
+
 # etc functions
 
 ## `trim()`

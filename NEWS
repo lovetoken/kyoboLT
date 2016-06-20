@@ -1,3 +1,11 @@
+Version 0.19.0
+==============
+
+* Date : 2016. 6. 20
+* add `mvp()` function
+* apply to Readme.md
+
+
 Version 0.17.1
 ==============
 
@@ -9,7 +17,7 @@ Version 0.17.0
 ==============
 
 * Date : 2016. 6. 9
-* `assess_returns()` function add
+* add `assess_returns()` function
 
 
 Version 0.16.3

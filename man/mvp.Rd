@@ -4,18 +4,22 @@
 \alias{mvp}
 \title{Minimum variance portfolio using returns xts dataset}
 \usage{
-mvp(returns.xts, precision = 0.01, plot = T, ...)
+mvp(returns.xts, precision = 0.01, rfr = 0, rg = NA, plot = T, ...)
 }
 \arguments{
 \item{returns.xts}{an \code{xts} object about returns dataset}
 
 \item{precision}{grid precision about investment weight}
+
+\item{rfr}{risk free rate}
+
+\item{rg}{goal of returns}
 }
 \value{
 data.frame type about assessment result
 }
 \description{
-Minimum variance portfolio using returns xts dataset
+Minimum variance portfolio & Market portfolio using returns xts dataset
 }
 \examples{
 index <- matrix(rnorm(60,1000, 8^2), 20, 3)
@@ -23,6 +27,6 @@ data <- xts(round(index, 1), as.Date(16001:16020))
 names(data) <- paste("Fund", 1:3, sep="_")
 returns <- Xday_returns(data, 1)
 
-mvp(returns)
+mvp(returns, .01)
 }
 

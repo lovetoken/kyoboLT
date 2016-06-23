@@ -4,6 +4,7 @@
 #' @param returns.xts an \code{xts} object about returns dataset
 #' @param precision grid precision about investment weight
 #' @param rfr risk free rate
+#' @param rg goal of returns
 #' @return data.frame type about assessment result
 #' @export
 #' @examples
@@ -14,7 +15,7 @@
 #'
 #' mvp(returns, .01)
 
-mvp <- function(returns.xts, precision=.01, rfr=0, plot=T, ...){
+mvp <- function(returns.xts, precision=.01, rfr=0, rg=NA, plot=T, ...){
 
   # pre
   stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(dplyr)); stopifnot(require(ggplot2))
@@ -27,7 +28,7 @@ mvp <- function(returns.xts, precision=.01, rfr=0, plot=T, ...){
     rep(n) %>%
     matrix(length(seq(0, 1, by=precision)), n) %>%
     data.frame %>%
-    expand.grid %>%
+    expand.grid %>% # !!
     as.matrix
 
   W <- poolset[rowSums(poolset)==1,] %>% t
@@ -60,9 +61,23 @@ mvp <- function(returns.xts, precision=.01, rfr=0, plot=T, ...){
                   slope = (res[res$Method=="Market Portfolio", "Portfolio_Returns"] - rfr)/res[res$Method=="Market Portfolio", "Volatility"],
                   color="red", lty=2, alpha=.3) +
       theme_bw() + xlim(0, NA)
-    print(P)
 
   }
+
+  # Testing
+
+  if(!is.na(rg)){
+
+    res_rg <- pool[which.approach(pool$Portfolio_Returns, rg), ]
+    res_rg$Method <- "Optimal Goal Portfolio"
+    reg_rg$Point_color <- "green"
+
+    res <- rbind(res, reg_rg)
+
+    P + geom_point(data = res[res$Method=="Optimal Goal Portfolio", ], color = "green")
+  }
+
+  print(P)
 
   # return
   attr(res, "poolset") <- pool

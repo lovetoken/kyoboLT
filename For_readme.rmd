@@ -12,8 +12,8 @@ library(dplyr)
 library(xts)
 library(reshape2)
 library(formattable)
-library(kyoboLT)
 library(knitr)
+library(kyoboLT)
 
 opts_chunk$set(fig.path='figure/', fig.align="center", message=FALSE, warning=FALSE)
 ```

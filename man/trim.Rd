@@ -10,7 +10,7 @@ trim(data, method = "trailing")
 Trimming of whitespace in character
 }
 \examples{
-trim("  Wow!  ", method="leading")
-trim("  Wow!  ", method="trailing")
+trim("  Wow!  ", method = "leading")
+trim("  Wow!  ", method = "trailing")
 }
 

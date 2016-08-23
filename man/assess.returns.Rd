@@ -20,7 +20,7 @@ Assess funds using returns xts dataset
 \examples{
 index <- matrix(rnorm(60,1000, 8^2), 20, 3)
 data <- xts(round(index, 1), as.Date(16001:16020)) # xts package for time series data
-names(data) <- paste("Fund", 1:3, sep="_")
+names(data) <- paste("Fund", 1:3, sep = "_")
 returns <- Xday_returns(data, 1)
 
 assess.returns(returns, "mean")

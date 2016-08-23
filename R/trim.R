@@ -5,20 +5,20 @@
 #' @param method
 #' @export
 #' @examples
-#' trim("  Wow!  ", method="leading")
-#' trim("  Wow!  ", method="trailing")
+#' trim("  Wow!  ", method = "leading")
+#' trim("  Wow!  ", method = "trailing")
 
-trim <- function(data, method="trailing"){
+trim <- function(data, method = "trailing"){
 
   # pre
   stopifnot(is.character(data)); stopifnot(method %in% c("leading", "trailing"))
 
   # content
-  if(method=="leading"){
+  if(method == "leading"){
 
     res <- sub("^\\s+", "", data)
 
-  } else if(method=="trailing"){
+  } else if(method == "trailing"){
 
     res <- sub("\\s+$", "", data)
 

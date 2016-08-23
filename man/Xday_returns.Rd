@@ -22,8 +22,8 @@ Account X day returns
 \examples{
 index <- matrix(rnorm(60,1000, 8^2), 20, 3)
 data <- xts(round(index, 1), as.Date(16001:16020)) # xts package for time series data
-names(data) <- paste("Fund", 1:3, sep="_")
+names(data) <- paste("Fund", 1:3, sep = "_")
 Xday_returns(data, 1)
-Xday_returns(data, 1, log.returns=T)
+Xday_returns(data, 1, log.returns = T)
 }
 

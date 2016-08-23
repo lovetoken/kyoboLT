@@ -5,7 +5,7 @@
 \title{Efficient Frontier}
 \usage{
 efff(returns, short = "no", max.allocation = NULL, risk.premium.up = 0.9,
-  risk.increment = 1e-04)
+  risk.increment = 1e-04, rg = NA, plot = T)
 }
 \description{
 Efficient Frontier
@@ -16,5 +16,7 @@ index <- matrix(rnorm(60,1000, 8^2), 20, 3)
 data <- xts(round(index, 1), as.Date(16001:16020))
 names(data) <- paste("Fund", 1:3, sep="_")
 returns <- Xday_returns(data, 1)
+
+result <- efff(returns, rg = 0.012)
 }
 

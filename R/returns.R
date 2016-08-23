@@ -13,7 +13,7 @@
 #' Xday_returns(data, 1)
 #' Xday_returns(data, 1, log.returns = T)
 
-Xday_returns <- function(xts, Xday = 1L, log.returns = F){
+Xday_returns <- function(xts, Xday = 1L, log.returns = F, start.omit = T){
 
   # pre
   stopifnot(require(dplyr)); stopifnot(require(xts))
@@ -30,6 +30,12 @@ Xday_returns <- function(xts, Xday = 1L, log.returns = F){
   } else {
 
     returns <- diff(xts, Xday) / apply(xts, 2, function(x) lag(x, Xday))
+
+  }
+
+  if(start.omit) {
+
+    returns <- returns[-seq(Xday), ]
 
   }
 

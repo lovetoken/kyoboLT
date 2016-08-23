@@ -1,7 +1,3 @@
-assess <- function(returns.xts, ...){
-  UseMethod("assess")
-}
-
 #' Assess funds using returns xts dataset
 #'
 #' Assess funds using returns xts dataset
@@ -19,7 +15,7 @@ assess <- function(returns.xts, ...){
 #' assess.returns(returns, "sd")
 #' assess.returns(returns, "S.R")
 
-assess.returns <- function(returns.xts, method = c("mean", "sd", "S.R"), ...){
+assess_returns <- function(returns.xts, method = c("mean", "sd", "S.R"), ...){
 
   # pre
   stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(formattable))
@@ -73,7 +69,7 @@ assess.returns <- function(returns.xts, method = c("mean", "sd", "S.R"), ...){
 #' names(data) <- paste("Fund", 1:3, sep = "_")
 #' returns <- Xday_returns(data, 1)
 
-assess.rank <- function(returns.xts, choice.stock, step = F, ...){
+assess_rank <- function(returns.xts, choice.stock, step = F, ...){
 
   # pre
   stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(ggplot2))

@@ -65,15 +65,16 @@ mvp <- function(returns.xts, precision = .01, rfr = 0, rg = NA, plot = T, ...){
 
   }
 
-  # Testing !!
+  ## rg attribute !!
 
   if(!is.na(rg)){
 
-    res_rg <- pool[which.approach(pool$Portfolio_Returns, rg), ]
+    index <- abs(pool$Portfolio_Returns - rg) %>% which.min
+    res_rg <- pool[index, ]
     res_rg$Method <- "Optimal Goal Portfolio"
-    reg_rg$Point_color <- "green"
+    res_rg$Point_color <- "green"
 
-    res <- rbind(res, reg_rg)
+    res <- rbind(res, res_rg)
 
     P + geom_point(data = res[res$Method == "Optimal Goal Portfolio", ], color = "green")
   }

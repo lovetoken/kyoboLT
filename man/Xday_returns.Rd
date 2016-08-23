@@ -4,7 +4,7 @@
 \alias{Xday_returns}
 \title{Account X day returns}
 \usage{
-Xday_returns(xts, Xday = 1L, log.returns = F)
+Xday_returns(xts, Xday = 1L, log.returns = F, start.omit = T)
 }
 \arguments{
 \item{xts}{an \code{xts} object}

@@ -10,7 +10,7 @@ efff(returns, short = "no", max.allocation = NULL, risk.premium.up = 0.9,
 \arguments{
 \item{rg}{numeric value, returns of goal}
 
-\item{plot}{logical value, about plotting}
+\item{plot}{logical value, return the plot?}
 }
 \description{
 Efficient Frontier

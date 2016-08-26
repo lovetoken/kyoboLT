@@ -2,7 +2,7 @@
 #'
 #' Efficient Frontier
 #' @param rg numeric value, returns of goal
-#' @param plot logical value, about plotting
+#' @param plot logical value, return the plot?
 #' @export
 #' @examples
 #' xdiff_returns(sample_index, x = 1) %>% efff(rg = .012, rfr = .001)
@@ -73,19 +73,16 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
 
   # ploting
 
-  if(plot){
+  P <- ggplot(pool, aes(x = Std_Dev, y = Exp_Return)) +
+    geom_point(size = .1, alpha = .01) +
+    geom_point(data = res, aes(x = Std_Dev, y = Exp_Return, color = Method), size = 2) +
+    geom_abline(intercept = rfr, slope = res[res$Method == "Optimal Portfolio", "rfr_scale"], alpha = .3, lty = 2) +
+    theme_bw() + labs(title = paste0("Efficient Frontier (rfr=", rfr, ")"), color = "")
 
-    P <- ggplot(pool, aes(x = Std_Dev, y = Exp_Return)) +
-      geom_point(size = .1, alpha = .01) +
-      geom_point(data = res, aes(x = Std_Dev, y = Exp_Return, color = Method), size = 2) +
-      geom_abline(intercept = rfr, slope = res[res$Method == "Optimal Portfolio", "rfr_scale"], alpha = .3, lty = 2) +
-      theme_bw() + labs(title = paste0("Efficient Frontier (rfr=", rfr, ")"), color = "")
-
-    print(P)
-
-  }
+  if(plot) return(P)
 
   # return
+  print(P)
   attr(res, "poolset") <- pool %>% tbl_df
   return(res)
 

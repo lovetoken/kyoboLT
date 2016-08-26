@@ -10,7 +10,7 @@
 #' @examples
 #' library("quantmod")
 #'
-#' data <- getSymbols("^ks11", from = Sys.Date()-1000, to = Sys.Date(), auto.assign = F)
+#' data <- getSymbols("^ks11", from = Sys.Date() - 1000, to = Sys.Date(), auto.assign = F)
 #'
 #' tmplot(data)
 #' tmplot(data, plotly = T)
@@ -76,7 +76,7 @@ tmplot <- function(xts, mv = c(20, 60, 120), plotly = F, ...){
 #' @examples
 #' library("quantmod")
 #'
-#' data <- getSymbols("^ks11", from = Sys.Date()-1000, to = Sys.Date(), auto.assign = F)
+#' data <- getSymbols("^ks11", from = Sys.Date() - 1000, to = Sys.Date(), auto.assign = F)
 #'
 #' tm1plot(data, "KS11.Close", plotly = T)
 

@@ -8,13 +8,7 @@
 #' @return data.frame type about assessment result
 #' @export
 #' @examples
-#' set.seed(777)
-#' index <- matrix(rnorm(60,1000, 8^2), 20, 3)
-#' data <- xts(round(index, 1), as.Date(16001:16020))
-#' names(data) <- paste("Fund", 1:3, sep="_")
-#' returns <- Xday_returns(data, 1)
-#'
-#' mvp(returns)
+#' sample_index %>% xdiff_returns(1) %>% mvp(rfr = 0.001)
 
 mvp <- function(returns.xts, precision = .01, rfr = 0, rg = NA, plot = T, ...){
 

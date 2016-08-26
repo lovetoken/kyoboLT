@@ -17,11 +17,4 @@ data.frame type about assessment result
 \description{
 Ranking assess funds using returns xts dataset & rank plotting
 }
-\examples{
-index <- matrix(rnorm(90,1000, 8^2), 30, 3)
-data <- xts(round(index, 1), as.Date(16001:16030))
-data[9:13, 3] <- NA
-names(data) <- paste("Fund", 1:3, sep = "_")
-returns <- Xday_returns(data, 1)
-}
 

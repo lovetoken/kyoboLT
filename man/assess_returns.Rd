@@ -18,13 +18,10 @@ data.frame type about assessment result
 Assess funds using returns xts dataset
 }
 \examples{
-index <- matrix(rnorm(60,1000, 8^2), 20, 3)
-data <- xts(round(index, 1), as.Date(16001:16020)) # xts package for time series data
-names(data) <- paste("Fund", 1:3, sep = "_")
-returns <- Xday_returns(data, 1)
+returns <- sample_index \%>\% xdiff_returns(1)
 
-assess.returns(returns, "mean")
-assess.returns(returns, "sd")
-assess.returns(returns, "S.R")
+assess_returns(returns, "mean")
+assess_returns(returns, "sd")
+assess_returns(returns, "S.R")
 }
 

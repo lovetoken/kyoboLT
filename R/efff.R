@@ -1,18 +1,14 @@
 #' Efficient Frontier
 #'
 #' Efficient Frontier
+#' @param rg numeric value, returns of goal
+#' @param plot logical value, about plotting
 #' @export
 #' @examples
-#' set.seed(777)
-#' index <- matrix(rnorm(60,1000, 8^2), 20, 3)
-#' data <- xts(round(index, 1), as.Date(16001:16020))
-#' names(data) <- paste("Fund", 1:3, sep="_")
-#' returns <- Xday_returns(data, 1)
-#'
-#' result <- efff(returns, rg = 0.012)
+#' xdiff_returns(sample_index, x = 1) %>% efff(rg = .012, rfr = .001)
 
 efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up = .9, risk.increment = .0001,
-                 rg = NA, plot = T){
+                 rg = NA, plot = T, rfr = 0){
 
   # pre
   stopifnot(require(quadprog)); stopifnot(require(dplyr)); stopifnot(require(ggplot2))
@@ -46,34 +42,32 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
 
   eff <- matrix(nrow=loops, ncol=n+3)
 
-  colnames(eff) <- c(colnames(returns), "Std.Dev", "Exp.Return", "sharpe")
+  colnames(eff) <- c(colnames(returns), "Std_Dev", "Exp_Return", "sharpe")
 
   for (i in seq(from = 0, to = risk.premium.up, by = risk.increment)){
     dvec <- colMeans(returns) * i
 
     sol <- solve.QP(covariance, dvec = dvec, Amat = Amat, bvec = bvec, meq = meq)
-    eff[loop, "Std.Dev"] <- sqrt(sum(sol$solution*colSums((covariance*sol$solution))))
-    eff[loop, "Exp.Return"] <- as.numeric(sol$solution %*% colMeans(returns))
-    eff[loop, "sharpe"] <- eff[loop,"Exp.Return"] / eff[loop,"Std.Dev"]
+    eff[loop, "Std_Dev"] <- sqrt(sum(sol$solution*colSums((covariance*sol$solution))))
+    eff[loop, "Exp_Return"] <- as.numeric(sol$solution %*% colMeans(returns))
+    eff[loop, "sharpe"] <- eff[loop,"Exp_Return"] / eff[loop,"Std_Dev"]
     eff[loop, 1:n] <- sol$solution
     loop <- loop+1
   }
 
-  pool <- as.data.frame(eff)
+  pool <- as.data.frame(eff) %>% mutate(rfr_scale = (Exp_Return - rfr) / Std_Dev)
 
   # condition rg
 
   if(!is.na(rg)){
 
-    res <- pool[c(which.min(abs(pool$Exp.Return - rg)), which.max(pool$sharpe)), ]
-    res$Method <- c("Returns of goal Portfolio", "Market Portfolio")
-    res$Point_color <- c("green", "red")
+    res <- pool[c(which.min(abs(pool$Exp_Return - rg)), which.max(pool$sharpe), which.max(pool$rfr_scale)), ]
+    res$Method <- c("Returns of goal Portfolio", "Market Portfolio", "Optimal Portfolio")
 
   } else {
 
-    res <- pool[which.max(pool$sharpe), ]
-    res$Method <- c("Market Portfolio")
-    res$Point_color <- c("red")
+    res <- pool[c(which.max(pool$sharpe), which.max(pool$rfr_scale)), ]
+    res$Method <- c("Market Portfolio", "Optimal Portfolio")
 
   }
 
@@ -81,11 +75,11 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
 
   if(plot){
 
-    P <- ggplot(pool, aes(x = Std.Dev, y = Exp.Return)) +
+    P <- ggplot(pool, aes(x = Std_Dev, y = Exp_Return)) +
       geom_point(size = .1, alpha = .01) +
-      geom_point(data = res[res$Method == "Returns of goal Portfolio", ], size = 2, color = "green") +
-      geom_point(data = res[res$Method == "Market Portfolio", ], size = 2, color = "red") +
-      theme_bw() + labs(title = "Efficient Frontier")
+      geom_point(data = res, aes(x = Std_Dev, y = Exp_Return, color = Method), size = 2) +
+      geom_abline(intercept = rfr, slope = res[res$Method == "Optimal Portfolio", "rfr_scale"], alpha = .3, lty = 2) +
+      theme_bw() + labs(title = paste0("Efficient Frontier (rfr=", rfr, ")"), color = "")
 
     print(P)
 

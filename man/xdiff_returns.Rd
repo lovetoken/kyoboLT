@@ -17,7 +17,7 @@ xdiff_returns(xts, x = 1L, log.returns = F, start.omit = T)
 xts type about returns dataset
 }
 \description{
-<U+FFFD> ì§œ<U+FFFD>€ êµ¬ë¶„<U+FFFD>†ì´ x <U+FFFD>œì°¨ ê°’ì„ ê¸°ì<U+FFFD><U+FFFD>¼ë¡œ <U+FFFD>˜ìµë¥ ì„ ê³„ì‚°<U+FFFD>©ë‹ˆ<U+FFFD><U+FFFD>.
+<U+FFFD>¼ê´„<U+FFFD>ìœ¼ë¡<U+FFFD> ëª¨ë“  x <U+FFFD>œì°¨ ê°’ì„ ê¸°ì<U+FFFD><U+FFFD>¼ë¡œ <U+FFFD>˜ìµë¥ ì„ ê³„ì‚°<U+FFFD>©ë‹ˆ<U+FFFD><U+FFFD>.
 }
 \examples{
 xdiff_returns(sample_index, 1)

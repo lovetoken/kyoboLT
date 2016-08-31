@@ -16,6 +16,6 @@ efff(returns, short = "no", max.allocation = NULL, risk.premium.up = 0.9,
 Efficient Frontier
 }
 \examples{
-xdiff_returns(sample_index, x = 1) \%>\% efff(rg = .012, rfr = .001)
+xdiff_returns(sample_index, x = 1) \%>\% efff(rg = .01, rfr = .001)
 }
 

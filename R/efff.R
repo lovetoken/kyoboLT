@@ -8,7 +8,7 @@
 #' xdiff_returns(sample_index, x = 1) %>% efff(rg = .01, rfr = .001)
 
 efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up = .9, risk.increment = .0001,
-                 rg = NA, plot = T, rfr = 0){
+                 rg = NA, plot = T, rfr = 0, rounding = NULL){
 
   # pre
   stopifnot(require(quadprog)); stopifnot(require(dplyr)); stopifnot(require(ggplot2))
@@ -56,7 +56,13 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
     loop <- loop + 1
   }
 
-  pool <- as.data.frame(eff)
+  # rounding
+
+  if(is.null(rounding)){
+    pool <- as.data.frame(eff)
+  } else {
+    pool <- as.data.frame(eff) %>% round(rounding)
+  }
 
   # condition rg
 
@@ -75,7 +81,7 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
   # ploting
 
   P <- ggplot(pool, aes(x = Std_Dev, y = Exp_Return)) +
-    geom_point(size = .1, alpha = .1) +
+    geom_point(size = .1, alpha = .5) +
     geom_point(data = res, aes(x = Std_Dev, y = Exp_Return, color = Method), size = 2) +
     theme_bw() + labs(title = paste0("Efficient Frontier (rfr=", rfr, ")"), color = "")
 

@@ -10,11 +10,11 @@
 #' xdiff_returns(sample_index, 1)
 #' xdiff_returns(sample_index, 1, log.returns = T)
 
-xdiff_returns <- function(xts, x = 1L, log.returns = F, start.omit = T){
+xdiff_returns <- function(xts, x = 1, log.returns = F, start.omit = T){
 
   # pre
   stopifnot(require(dplyr)); stopifnot(require(xts))
-  stopifnot(is.integer(x))
+  x <- as.integer(x)
 
   nr <- dim(xts)[1]
   nc <- dim(xts)[2]

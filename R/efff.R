@@ -1,6 +1,6 @@
 #' Efficient Frontier
 #'
-#' Efficient Frontier
+#' Efficient Frontier using excess earning rate
 #' @param rg numeric value, returns of goal
 #' @param plot logical value, return the plot?
 #' @export
@@ -75,7 +75,7 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
   # ploting
 
   P <- ggplot(pool, aes(x = Std_Dev, y = Exp_Return)) +
-    geom_point(size = .1, alpha = .01) +
+    geom_point(size = .1, alpha = .1) +
     geom_point(data = res, aes(x = Std_Dev, y = Exp_Return, color = Method), size = 2) +
     theme_bw() + labs(title = paste0("Efficient Frontier (rfr=", rfr, ")"), color = "")
 

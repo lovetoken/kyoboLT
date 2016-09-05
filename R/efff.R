@@ -68,7 +68,7 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
 
   if(!is.na(rg)){
 
-    res <- pool[c(which.min(abs(pool$Exp_Return - rg)), which.max(pool$sharpe)), ]
+    res <- pool[c(which.min((pool$Exp_Return - rg)^2), which.max(pool$sharpe)), ]
     res$Method <- c("Returns of goal Portfolio", "Optimal Portfolio")
 
   } else {

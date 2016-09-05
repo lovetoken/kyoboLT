@@ -83,7 +83,7 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
   P <- ggplot(pool, aes(x = Std_Dev, y = Exp_Return)) +
     geom_point(size = .1, alpha = .5) +
     geom_point(data = res, aes(x = Std_Dev, y = Exp_Return, color = Method), size = 2) +
-    theme_bw() + labs(title = paste0("Efficient Frontier (rfr=", rfr, ")"), color = "")
+    labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "")
 
   if(plot) return(P)
 

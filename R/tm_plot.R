@@ -58,7 +58,7 @@ tmplot <- function(xts, mv = c(20, 60, 120), plotly = F, ...){
     geom_line(col = "blue", aes(y = moving_average_2), stat = "identity") +
     geom_line(col = "red", aes(y = moving_average_3), stat = "identity") +
     facet_grid(variable ~ ., scales = "free", ...) +
-    theme_bw() + ylab("") + xlab("")
+    labs(x = "", y = "")
 
   # return
   if(plotly) ggplotly(P) else P
@@ -124,7 +124,7 @@ tm1plot <- function(xts, choice.stock, mv = c(20, 60, 120), plotly = F, ...){
     geom_line(data=PD1_2, aes(y = moving_average_2), color = "blue") +
     geom_line(data=PD1_3, aes(y = moving_average_3), color = "red") +
     facet_grid(. ~ variable, scales = "free", ...) +
-    guides(fill = F) + ylab("") + xlab("")
+    guides(fill = F) + labs(x = "", y = "")
 
   # return
   if(plotly) ggplotly(P) else P

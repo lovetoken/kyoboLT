@@ -55,7 +55,7 @@ mvp <- function(returns.xts, precision = .01, rfr = 0, rg = NA, plot = T, ...){
       geom_abline(intercept = rfr,
                   slope = (res[res$Method == "Market Portfolio", "Portfolio_Returns"] - rfr)/res[res$Method == "Market Portfolio", "Volatility"],
                   color = "red", lty = 2, alpha = .3) +
-      theme_bw() + xlim(0, NA)
+      xlim(0, NA)
 
   }
 

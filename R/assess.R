@@ -83,7 +83,7 @@ assess_rank <- function(returns.xts, choice.stock, step = F, ...){
   if(step){
 
     p + geom_step(alpha = .3, col = "blue") +
-      geom_point() + theme_bw() +
+      geom_point() +
       theme(axis.text.x = element_text(angle = 90)) +
       geom_text(aes(vjust = -1), size = 3, alpha = .3) +
       labs(x = "", y = "Rank")
@@ -91,7 +91,7 @@ assess_rank <- function(returns.xts, choice.stock, step = F, ...){
     } else {
 
       p + geom_line(alpha = .3, col = "blue") +
-        geom_point() + theme_bw() +
+        geom_point() +
         theme(axis.text.x = element_text(angle = 90)) +
         geom_text(aes(vjust = -1), size = 3, alpha = .3) +
         labs(x = "", y = "Rank")

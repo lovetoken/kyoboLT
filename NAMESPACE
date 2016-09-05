@@ -2,6 +2,7 @@
 
 export(assess_rank)
 export(assess_returns)
+export(cormat)
 export(efff)
 export(mvp)
 export(tm1plot)

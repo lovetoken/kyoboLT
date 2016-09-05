@@ -3,6 +3,7 @@
 #' This function is alias \code{psych::pairs.panels()}. It can visualize for standardization.
 #' @export
 #' @examples
+#' cormat(cars)
 
 cormat <- function(dat, pch = '.', ...){
 

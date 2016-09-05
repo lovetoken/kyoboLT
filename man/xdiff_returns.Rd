@@ -4,7 +4,7 @@
 \alias{xdiff_returns}
 \title{Accounting x diff returns}
 \usage{
-xdiff_returns(xts, x = 1L, log.returns = F, start.omit = T)
+xdiff_returns(xts, x = 1, log.returns = F, start.omit = T)
 }
 \arguments{
 \item{xts}{an \code{xts} object}

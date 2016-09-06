@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>xdiffs_returns. kyoboLT 0.4.5</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">kyoboLT 0.4.5</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Accounting x diff returns</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='xdiffs_returns.html'>xdiffs_returns</a></span><span class="keyword">(</span><span class="symbol">xts</span><span class="keyword">,</span> <span class="symbol">x</span><span class="keyword">,</span> <span class="argument">log.returns</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">F</span><span class="keyword">,</span> <span class="argument">start.omit</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">T</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>xts</dt>
+      <dd>an <code>xts</code> object</dd>
+      <dt>x</dt>
+      <dd>an integer vector</dd>
+      <dt>log.returns</dt>
+      <dd>logical asking whether to calculate log returns</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+xts type about returns dataset
+</dl></p>
+
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>각기 &lt;U+FFFD&gt;�른 x &lt;U+FFFD&gt;�차 값을 기�&lt;U+FFFD&gt;&lt;U+FFFD&gt;�로 &lt;U+FFFD&gt;�익률을 계산&lt;U+FFFD&gt;�니&lt;U+FFFD&gt;&lt;U+FFFD&gt;. &lt;U+FFFD&gt;�라&lt;U+FFFD&gt;&lt;U+FFFD&gt; <code>x</code>&lt;U+FFFD&gt;&lt;U+FFFD&gt; <code>n = nrow(xts)</code> 만큼&lt;U+FFFD&gt;&lt;U+FFFD&gt; 벡터&lt;U+FFFD&gt;�&lt;U+FFFD&gt;�값&lt;U+FFFD&gt;&lt;U+FFFD&gt; 받아&lt;U+FFFD&gt;&lt;U+FFFD&gt; &lt;U+FFFD&gt;�니&lt;U+FFFD&gt;&lt;U+FFFD&gt;.</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="functioncall"><a href='xdiffs_returns.html'>xdiffs_returns</a></span><span class="keyword">(</span><span class="symbol">sample_index</span><span class="keyword">,</span> <span class="argument">x</span> <span class="argument">=</span> <span class="number">0</span><span class="keyword">:</span><span class="number">19</span><span class="keyword">)</span></div>
+<div class='output'>                  Fund_1       Fund_2        Fund_3
+2013-10-23  0.0000000000  0.000000000  0.0000000000
+2013-10-24  0.0769891242 -0.032855499 -0.0742545872
+2013-10-25 -0.0676397634  0.131317359 -0.0739678899
+2013-10-26  0.0778477390  0.025426389  0.0685206422
+2013-10-27 -0.1813585194  0.048446165 -0.0128058104
+2013-10-28  0.0002862049 -0.052945485 -0.1124808869
+2013-10-29 -0.1257393627 -0.029088626 -0.0632645260
+2013-10-30 -0.0950200343 -0.071779847 -0.0387041284
+2013-10-31 -0.1554092730 -0.024798577 -0.0049694190
+2013-11-01 -0.0485594352 -0.043632939 -0.0214067278
+2013-11-02  0.0852890670  0.096892330 -0.0323012232
+2013-11-03 -0.1540736501  0.003348331  0.0279051988
+2013-11-04  0.0067735165  0.142199435 -0.0871559633
+2013-11-05 -0.1510207976  0.004499320 -0.0814220183
+2013-11-06 -0.0377790498  0.061734854 -0.0753058104
+2013-11-07 -0.0506582713  0.063932196 -0.0945145260
+2013-11-08  0.0063919099  0.075128178 -0.0587729358
+2013-11-09 -0.0248998283 -0.053050120 -0.0914564220
+2013-11-10 -0.0815684030  0.058386523 -0.0002866972
+2013-11-11  0.0020034345  0.184367479  0.0339258410
+</div>
+<div class='input'><span class="functioncall"><a href='xdiffs_returns.html'>xdiffs_returns</a></span><span class="keyword">(</span><span class="symbol">sample_index</span><span class="keyword">,</span> <span class="argument">x</span> <span class="argument">=</span> <span class="number">0</span><span class="keyword">:</span><span class="number">19</span><span class="keyword">,</span> <span class="argument">log.returns</span> <span class="argument">=</span> <span class="symbol">T</span><span class="keyword">)</span></div>
+<div class='output'>                 Fund_1       Fund_2        Fund_3
+2013-10-23  0.000000000  0.000000000  0.0000000000
+2013-10-24  0.074169300 -0.033407362 -0.0771560143
+2013-10-25 -0.070036019  0.123382758 -0.0768463688
+2013-10-26  0.074966219  0.025108515  0.0662751145
+2013-10-27 -0.200109044  0.047309225 -0.0128885116
+2013-10-28  0.000286164 -0.054398621 -0.1193252219
+2013-10-29 -0.134376736 -0.029520088 -0.0653543482
+2013-10-30 -0.099842473 -0.074486341 -0.0394730386
+2013-10-31 -0.168903116 -0.025111242 -0.0049818076
+2013-11-01 -0.049778059 -0.044613485 -0.0216391751
+2013-11-02  0.081846373  0.092481027 -0.0328344212
+2013-11-03 -0.167322980  0.003342738  0.0275229437
+2013-11-04  0.006750679  0.132955733 -0.0911902381
+2013-11-05 -0.163720590  0.004489228 -0.0849284768
+2013-11-06 -0.038511177  0.059904225 -0.0782922020
+2013-11-07 -0.051986452  0.061971664 -0.0992840437
+2013-11-08  0.006371568  0.072439890 -0.0605708675
+2013-11-09 -0.025215073 -0.054509113 -0.0959124253
+2013-11-10 -0.085087850  0.056745600 -0.0002867384
+2013-11-11  0.002001430  0.169208859  0.0333630530
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>xdiffs_returns</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

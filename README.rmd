@@ -2,8 +2,8 @@
 title: "Readme"
 output:
   rmdformats::readthedown:
-    fig_height: 7
-    fig_width: 7
+    fig_height: 5
+    fig_width: 6.5
     keep_md: yes
 ---
 
@@ -15,7 +15,7 @@ library(formattable)
 library(knitr)
 library(kyoboLT)
 
-opts_chunk$set(fig.path='figure/', fig.align="center", message=FALSE, warning=FALSE)
+opts_chunk$set(fig.align="center", message=FALSE, warning=FALSE)
 ```
 
 # install `kyoboLT` package
@@ -35,17 +35,17 @@ names(data) <- paste("Fund", 1:4, sep="_")
 data
 
 # basic 3 day returns
-Xday_returns(data, Xday = 3)
+xdiff_returns(data, 3)
 # calculation 3 day log returns
-Xday_returns(data, Xday = 3, log.returns = T)
+xdiff_returns(data, 3, log.returns = T)
 # not omit about start time index
-Xday_returns(data, Xday = 3, start.omit = F)
+xdiff_returns(data, 3, start.omit = F)
 ```
 
 ## `assess_returns()`
 
 ```{r}
-returns <- Xday_returns(data, Xday = 1, log.returns = T)
+returns <- xdiff_returns(data, 1, log.returns = T)
 
 assess_returns(returns, "mean")
 assess_returns(returns, "sd")
@@ -69,7 +69,7 @@ set.seed(123)
 index <- matrix(rnorm(4000, 1000, 10^2), 1000, 4)
 data <- xts(round(index, 1), as.Date(16001:17000)) # xts package for time series data
 names(data) <- paste("Fund", 1:4, sep="_")
-returns <- Xday_returns(data, Xday = 1)
+returns <- xdiff_returns(data, 1)
 
 efff(returns, rg = 0.01039)
 ```

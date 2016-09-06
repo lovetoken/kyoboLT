@@ -14,6 +14,6 @@ library("quantmod")
 
 data <- getSymbols("^ks11", from = Sys.Date() - 1000, to = Sys.Date(), auto.assign = F)
 
-tm1plot(data, "KS11.Close", plotly = T)
+tm1plot(data, "KS11.Close")
 }
 

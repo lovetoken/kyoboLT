@@ -1,28 +1,74 @@
-# Readme
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Home. kyoboLT 0.4.5</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Hyojin Song">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">kyoboLT 0.4.5</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <div class="row">
+  <div class="span8">
+    <h1>Readme</h1>
 
-# install `kyoboLT` package
+<h1>install <code>kyoboLT</code> package</h1>
 
+<pre><code class="r">devtools::install_github(&quot;lovetoken/kyoboLT&quot;)
+</code></pre>
 
-```r
-devtools::install_github("lovetoken/kyoboLT")
-```
+<h1>Useful functions for time series data</h1>
 
-# Useful functions for time series data
+<h2><code>Xday_returns()</code></h2>
 
-## `Xday_returns()`
-
-
-```r
-index <- matrix(rnorm(120, 1000, 10^2), 30, 4)
-data <- xts(round(index, 1), as.Date(16001:16030)) # xts package for time series data
-names(data) <- paste("Fund", 1:4, sep="_")
+<pre><code class="r">index &lt;- matrix(rnorm(120, 1000, 10^2), 30, 4)
+data &lt;- xts(round(index, 1), as.Date(16001:16030)) # xts package for time series data
+names(data) &lt;- paste(&quot;Fund&quot;, 1:4, sep=&quot;_&quot;)
 data
-```
+</code></pre>
 
-```
-##            Fund_1 Fund_2 Fund_3 Fund_4
+<pre><code>##            Fund_1 Fund_2 Fund_3 Fund_4
 ## 2013-10-23  914.8 1261.6  980.9  924.4
 ## 2013-10-24 1081.6  920.1 1022.6 1053.7
 ## 2013-10-25  998.0  880.8  825.1  998.4
@@ -53,15 +99,13 @@ data
 ## 2013-11-19 1073.6 1047.1  904.1  906.1
 ## 2013-11-20 1032.1  967.2  966.1  921.2
 ## 2013-11-21  904.6 1093.9 1022.4  998.4
-```
+</code></pre>
 
-```r
-# basic 3 day returns
+<pre><code class="r"># basic 3 day returns
 xdiff_returns(data, 3)
-```
+</code></pre>
 
-```
-##                 Fund_1       Fund_2      Fund_3        Fund_4
+<pre><code>##                 Fund_1       Fund_2      Fund_3        Fund_4
 ## 2013-10-26  0.18495846 -0.322051363  0.14853706  0.0509519688
 ## 2013-10-27 -0.08422707 -0.050429301  0.05896734  0.0316978267
 ## 2013-10-28  0.22184369  0.083673933  0.43752272  0.0088141026
@@ -89,15 +133,13 @@ xdiff_returns(data, 3)
 ## 2013-11-19  0.04517134  0.195592601 -0.07357311 -0.1674935685
 ## 2013-11-20  0.12002170  0.089925625  0.02558386 -0.1085736404
 ## 2013-11-21 -0.03990660  0.310530730 -0.04564548  0.0443514644
-```
+</code></pre>
 
-```r
-# calculation 3 day log returns
+<pre><code class="r"># calculation 3 day log returns
 xdiff_returns(data, 3, log.returns = T)
-```
+</code></pre>
 
-```
-##                 Fund_1       Fund_2      Fund_3        Fund_4
+<pre><code>##                 Fund_1       Fund_2      Fund_3        Fund_4
 ## 2013-10-26  0.16970772 -0.388683751  0.13848901  0.0496963904
 ## 2013-10-27 -0.08798684 -0.051745292  0.05729422  0.0312058206
 ## 2013-10-28  0.20036094  0.080357058  0.36292130  0.0087754851
@@ -125,15 +167,13 @@ xdiff_returns(data, 3, log.returns = T)
 ## 2013-11-19  0.04418083  0.178641963 -0.07642015 -0.1833143317
 ## 2013-11-20  0.11334806  0.086109460  0.02526207 -0.1149324479
 ## 2013-11-21 -0.04072471  0.270432192 -0.04672006  0.0433960846
-```
+</code></pre>
 
-```r
-# not omit about start time index
+<pre><code class="r"># not omit about start time index
 xdiff_returns(data, 3, start.omit = F)
-```
+</code></pre>
 
-```
-##                 Fund_1       Fund_2      Fund_3        Fund_4
+<pre><code>##                 Fund_1       Fund_2      Fund_3        Fund_4
 ## 2013-10-23          NA           NA          NA            NA
 ## 2013-10-24          NA           NA          NA            NA
 ## 2013-10-25          NA           NA          NA            NA
@@ -164,78 +204,83 @@ xdiff_returns(data, 3, start.omit = F)
 ## 2013-11-19  0.04517134  0.195592601 -0.07357311 -0.1674935685
 ## 2013-11-20  0.12002170  0.089925625  0.02558386 -0.1085736404
 ## 2013-11-21 -0.03990660  0.310530730 -0.04564548  0.0443514644
-```
+</code></pre>
 
-## `assess_returns()`
+<h2><code>assess_returns()</code></h2>
 
+<pre><code class="r">returns &lt;- xdiff_returns(data, 1, log.returns = T)
 
-```r
-returns <- xdiff_returns(data, 1, log.returns = T)
+assess_returns(returns, &quot;mean&quot;)
+</code></pre>
 
-assess_returns(returns, "mean")
-```
-
-```
-##   Rank  Names  Value
+<pre><code>##   Rank  Names  Value
 ## 1    1 Fund_4  0.27%
 ## 2    2 Fund_3  0.14%
 ## 3    3 Fund_1 -0.04%
 ## 4    4 Fund_2 -0.49%
-```
+</code></pre>
 
-```r
-assess_returns(returns, "sd")
-```
+<pre><code class="r">assess_returns(returns, &quot;sd&quot;)
+</code></pre>
 
-```
-##   Rank  Names  Value
+<pre><code>##   Rank  Names  Value
 ## 1    1 Fund_4 11.50%
 ## 2    2 Fund_2 14.13%
 ## 3    3 Fund_3 14.76%
 ## 4    4 Fund_1 20.07%
-```
+</code></pre>
 
-```r
-assess_returns(returns, "S.R")
-```
+<pre><code class="r">assess_returns(returns, &quot;S.R&quot;)
+</code></pre>
 
-```
-##   Rank  Names  Value
+<pre><code>##   Rank  Names  Value
 ## 1    1 Fund_4  2.31%
 ## 2    2 Fund_3  0.97%
 ## 3    3 Fund_1 -0.19%
 ## 4    4 Fund_2 -3.48%
-```
+</code></pre>
 
-## `tmplot()`
+<h2><code>tmplot()</code></h2>
 
-
-```r
-library("quantmod")
-data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
+<pre><code class="r">library(&quot;quantmod&quot;)
+data &lt;- getSymbols(&quot;^ks11&quot;, from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
 
 tmplot(data)
-```
+</code></pre>
 
-<img src="README_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<p><img src="README_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /></p>
 
-```r
-tm1plot(data, "KS11.Close")
-```
+<pre><code class="r">tm1plot(data, &quot;KS11.Close&quot;)
+</code></pre>
 
-<img src="README_files/figure-html/unnamed-chunk-5-2.png" style="display: block; margin: auto;" />
+<p><img src="README_files/figure-html/unnamed-chunk-5-2.png" style="display: block; margin: auto;" /></p>
 
-## `efff()`
+<h2><code>efff()</code></h2>
 
-
-```r
-set.seed(123)
-index <- matrix(rnorm(4000, 1000, 10^2), 1000, 4)
-data <- xts(round(index, 1), as.Date(16001:17000)) # xts package for time series data
-names(data) <- paste("Fund", 1:4, sep="_")
-returns <- xdiff_returns(data, 1)
+<pre><code class="r">set.seed(123)
+index &lt;- matrix(rnorm(4000, 1000, 10^2), 1000, 4)
+data &lt;- xts(round(index, 1), as.Date(16001:17000)) # xts package for time series data
+names(data) &lt;- paste(&quot;Fund&quot;, 1:4, sep=&quot;_&quot;)
+returns &lt;- xdiff_returns(data, 1)
 
 efff(returns, rg = 0.01039)
-```
+</code></pre>
 
-<img src="README_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<p><img src="README_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /></p>
+
+  </div>
+
+  <div class="span3 offset1 sidebar">
+        <h2>Authors</h2>
+    <ul>
+    </ul>
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

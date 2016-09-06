@@ -27,6 +27,5 @@ library("quantmod")
 data <- getSymbols("^ks11", from = Sys.Date() - 1000, to = Sys.Date(), auto.assign = F)
 
 tmplot(data)
-tmplot(data, plotly = T)
 }
 

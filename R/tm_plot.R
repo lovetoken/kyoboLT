@@ -13,7 +13,6 @@
 #' data <- getSymbols("^ks11", from = Sys.Date() - 1000, to = Sys.Date(), auto.assign = F)
 #'
 #' tmplot(data)
-#' tmplot(data, plotly = T)
 
 tmplot <- function(xts, mv = c(20, 60, 120), plotly = F, ...){
 
@@ -78,7 +77,7 @@ tmplot <- function(xts, mv = c(20, 60, 120), plotly = F, ...){
 #'
 #' data <- getSymbols("^ks11", from = Sys.Date() - 1000, to = Sys.Date(), auto.assign = F)
 #'
-#' tm1plot(data, "KS11.Close", plotly = T)
+#' tm1plot(data, "KS11.Close")
 
 tm1plot <- function(xts, choice.stock, mv = c(20, 60, 120), plotly = F, ...){
 
@@ -98,7 +97,7 @@ tm1plot <- function(xts, choice.stock, mv = c(20, 60, 120), plotly = F, ...){
 
   ## base ggplot
   P <- ggplot(PD, aes(x = date, y = value, group = variable)) +
-    geom_line(size = .8, color = "grey") + theme_bw() + labs(x = "Date", y = "") +
+    geom_line(size = .8, color = "grey") + labs(x = "Date", y = "") +
     theme(axis.text.x = element_text(angle = 90))
 
   ## moving average line

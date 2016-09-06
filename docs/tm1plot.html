@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>tm1plot. kyoboLT 0.4.5</title>
+<title>tm1plot. kyoboLT 0.1.0.0045</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="index.html">kyoboLT 0.4.5</a>
+      <a class="brand" href="index.html">kyoboLT 0.1.0.0045</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
@@ -64,11 +64,39 @@
     </div>
     
     <h2 id="examples">Examples</h2>
-    <pre class="examples"><div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/library'>library</a></span><span class="keyword">(</span><span class="string">"quantmod"</span><span class="keyword">)</span>
+    <pre class="examples"><div class='input'><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/library'>library</a></span><span class="keyword">(</span><span class="string">"quantmod"</span><span class="keyword">)</span></div>
+<strong class='message'>Loading required package: TTR</strong>
+<strong class='message'>Version 0.4-0 included new data defaults. See ?getSymbols.</strong>
+<div class='input'>
+<span class="symbol">data</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/quantmod/topics/getSymbols'>getSymbols</a></span><span class="keyword">(</span><span class="string">"^ks11"</span><span class="keyword">,</span> <span class="argument">from</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.Date</a></span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">-</span> <span class="number">1000</span><span class="keyword">,</span> <span class="argument">to</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.Date</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">auto.assign</span> <span class="argument">=</span> <span class="symbol">F</span><span class="keyword">)</span></div>
+<strong class='message'>    As of 0.4-0, ¡®getSymbols¡¯ uses env=parent.frame() and
+ auto.assign=TRUE by default.
 
-<span class="symbol">data</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/quantmod/topics/getSymbols'>getSymbols</a></span><span class="keyword">(</span><span class="string">"^ks11"</span><span class="keyword">,</span> <span class="argument">from</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.Date</a></span><span class="keyword">(</span><span class="keyword">)</span> <span class="keyword">-</span> <span class="number">1000</span><span class="keyword">,</span> <span class="argument">to</span> <span class="argument">=</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.Date</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">auto.assign</span> <span class="argument">=</span> <span class="symbol">F</span><span class="keyword">)</span>
+ This  behavior  will be  phased out in 0.5-0  when the call  will
+ default to use auto.assign=FALSE. getOption(&quot;getSymbols.env&quot;) and 
+ getOptions(&quot;getSymbols.auto.assign&quot;) are now checked for alternate defaults
 
+ This message is shown once per session and may be disabled by setting 
+ options(&quot;getSymbols.warning4.0&quot;=FALSE). See ?getSymbols for more details.</strong>
+<div class='input'>
 <span class="functioncall"><a href='tm1plot.html'>tm1plot</a></span><span class="keyword">(</span><span class="symbol">data</span><span class="keyword">,</span> <span class="string">"KS11.Close"</span><span class="keyword">)</span></div>
+<strong class='message'>Loading required package: plotly</strong>
+<strong class='message'>
+Attaching package: ¡®plotly¡¯
+</strong>
+<strong class='message'>The following object is masked from ¡®package:ggplot2¡¯:
+
+    last_plot
+</strong>
+<strong class='message'>The following object is masked from ¡®package:formattable¡¯:
+
+    style
+</strong>
+<strong class='message'>The following object is masked from ¡®package:graphics¡¯:
+
+    layout
+</strong>
+<strong class='message'>Loading required package: reshape2</strong>
 <strong class='warning'>Warning message:
 na.pad argument is deprecated</strong>
 <strong class='warning'>Warning message:
@@ -81,7 +109,7 @@ Removed 19 rows containing missing values (geom_path).</strong>
 Removed 59 rows containing missing values (geom_path).</strong>
 <strong class='warning'>Warning message:
 Removed 119 rows containing missing values (geom_path).</strong>
-<p><img src='tm1plot-8.png' alt='' width='540' height='400' /></p></pre>
+<p><img src='tm1plot-19.png' alt='' width='540' height='400' /></p></pre>
   </div>
   <div class="span4 sidebar">
     <!-- <ul>

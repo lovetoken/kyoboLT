@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>assess_returns. kyoboLT 0.4.5</title>
+<title>assess_returns. kyoboLT 0.1.0.0045</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="index.html">kyoboLT 0.4.5</a>
+      <a class="brand" href="index.html">kyoboLT 0.1.0.0045</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
@@ -81,26 +81,44 @@ data.frame type about assessment result
     </div>
     
     <h2 id="examples">Examples</h2>
-    <pre class="examples"><div class='input'><span class="symbol">returns</span> <span class="assignement">&lt;-</span> <span class="symbol">sample_index</span> <span class="keyword">%&gt;%</span> <span class="functioncall"><a href='xdiff_returns.html'>xdiff_returns</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">)</span>
-
+    <pre class="examples"><div class='input'><span class="symbol">returns</span> <span class="assignement">&lt;-</span> <span class="symbol">sample_index</span> <span class="keyword">%&gt;%</span> <span class="functioncall"><a href='xdiff_returns.html'>xdiff_returns</a></span><span class="keyword">(</span><span class="number">1</span><span class="keyword">)</span></div>
+<strong class='error'>Error in eval(expr, envir, enclos): could not find function &quot;%&gt;%&quot;</strong>
+<div class='input'>
 <span class="functioncall"><a href='assess_returns.html'>assess_returns</a></span><span class="keyword">(</span><span class="symbol">returns</span><span class="keyword">,</span> <span class="string">"mean"</span><span class="keyword">)</span></div>
-<div class='output'>  Rank  Names Value
-1    1 Fund_2 1.31%
-2    2 Fund_1 0.97%
-3    3 Fund_3 0.39%
-</div>
+<strong class='message'>Loading required package: dplyr</strong>
+<strong class='message'>
+Attaching package: ¡®dplyr¡¯
+</strong>
+<strong class='message'>The following objects are masked from ¡®package:stats¡¯:
+
+    filter, lag
+</strong>
+<strong class='message'>The following objects are masked from ¡®package:base¡¯:
+
+    intersect, setdiff, setequal, union
+</strong>
+<strong class='message'>Loading required package: xts</strong>
+<strong class='message'>Loading required package: zoo</strong>
+<strong class='message'>
+Attaching package: ¡®zoo¡¯
+</strong>
+<strong class='message'>The following objects are masked from ¡®package:base¡¯:
+
+    as.Date, as.Date.numeric
+</strong>
+<strong class='message'>
+Attaching package: ¡®xts¡¯
+</strong>
+<strong class='message'>The following objects are masked from ¡®package:dplyr¡¯:
+
+    first, last
+</strong>
+<strong class='message'>Loading required package: formattable</strong>
+<strong class='error'>Error in lapply(X = X, FUN = FUN, ...): object &#39;returns&#39; not found</strong>
 <div class='input'><span class="functioncall"><a href='assess_returns.html'>assess_returns</a></span><span class="keyword">(</span><span class="symbol">returns</span><span class="keyword">,</span> <span class="string">"sd"</span><span class="keyword">)</span></div>
-<div class='output'>  Rank  Names  Value
-1    1 Fund_3  6.72%
-2    2 Fund_2  9.40%
-3    3 Fund_1 14.03%
-</div>
+<strong class='error'>Error in lapply(X = X, FUN = FUN, ...): object &#39;returns&#39; not found</strong>
 <div class='input'><span class="functioncall"><a href='assess_returns.html'>assess_returns</a></span><span class="keyword">(</span><span class="symbol">returns</span><span class="keyword">,</span> <span class="string">"S.R"</span><span class="keyword">)</span></div>
-<div class='output'>  Rank  Names  Value
-1    1 Fund_2 13.90%
-2    2 Fund_1  6.92%
-3    3 Fund_3  5.78%
-</div></pre>
+<strong class='error'>Error in lapply(X = X, FUN = FUN, ...): object &#39;returns&#39; not found</strong></pre>
   </div>
   <div class="span4 sidebar">
     <!-- <ul>

@@ -15,7 +15,7 @@ library(formattable)
 library(knitr)
 library(kyoboLT)
 
-opts_chunk$set(fig.align="center", message=FALSE, warning=FALSE)
+opts_chunk$set(fig.align="center", message = F, warning = F)
 ```
 
 # install `kyoboLT` package
@@ -31,7 +31,7 @@ devtools::install_github("lovetoken/kyoboLT")
 ```{r}
 index <- matrix(rnorm(120, 1000, 10^2), 30, 4)
 data <- xts(round(index, 1), as.Date(16001:16030)) # xts package for time series data
-names(data) <- paste("Fund", 1:4, sep="_")
+names(data) <- paste("Fund", 1:4, sep = "_")
 data
 
 # basic 3 day returns
@@ -56,7 +56,7 @@ assess_returns(returns, "S.R")
 
 ```{r}
 library("quantmod")
-data <- getSymbols("^ks11", from=Sys.Date()-1000, to=Sys.Date(), auto.assign=F)
+data <- getSymbols("^ks11", from=Sys.Date()-1000, to = Sys.Date(), auto.assign = F)
 
 tmplot(data)
 tm1plot(data, "KS11.Close")
@@ -68,7 +68,7 @@ tm1plot(data, "KS11.Close")
 set.seed(123)
 index <- matrix(rnorm(4000, 1000, 10^2), 1000, 4)
 data <- xts(round(index, 1), as.Date(16001:17000)) # xts package for time series data
-names(data) <- paste("Fund", 1:4, sep="_")
+names(data) <- paste("Fund", 1:4, sep = "_")
 returns <- xdiff_returns(data, 1)
 
 efff(returns, rg = 0.01039)

@@ -73,3 +73,20 @@ returns <- xdiff_returns(data, 1)
 
 efff(returns, rg = 0.01039)
 ```
+
+# Useful manipulation
+
+## `mmadjust()`
+
+```{r}
+(x <- c(NA, 1:100*.01, NA))
+mmadjust(x, .2, .8)
+```
+
+## `trim()`
+
+```{r}
+trim("  Wow!  ", method = "leading")
+trim("  Wow!  ", method = "trailing")
+"  Wow!  " %>% trim %>% trim(method = "leading")
+```

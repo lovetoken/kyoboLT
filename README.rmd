@@ -29,23 +29,21 @@ devtools::install_github("lovetoken/kyoboLT")
 ## `Xday_returns()`
 
 ```{r}
-index <- matrix(rnorm(120, 1000, 10^2), 30, 4)
-data <- xts(round(index, 1), as.Date(16001:16030)) # xts package for time series data
-names(data) <- paste("Fund", 1:4, sep = "_")
-data
+data(sample_index)
+sample_index
 
 # basic 3 day returns
-xdiff_returns(data, 3)
+xdiff_returns(sample_index, 3)
 # calculation 3 day log returns
-xdiff_returns(data, 3, log.returns = T)
+xdiff_returns(sample_index, 3, log.returns = T)
 # not omit about start time index
-xdiff_returns(data, 3, start.omit = F)
+xdiff_returns(sample_index, 3, start.omit = F)
 ```
 
 ## `assess_returns()`
 
 ```{r}
-returns <- xdiff_returns(data, 1, log.returns = T)
+returns <- xdiff_returns(sample_index, 1, log.returns = T)
 
 assess_returns(returns, "mean")
 assess_returns(returns, "sd")
@@ -65,12 +63,7 @@ tm1plot(data, "KS11.Close")
 ## `efff()`
 
 ```{r}
-set.seed(123)
-index <- matrix(rnorm(4000, 1000, 10^2), 1000, 4)
-data <- xts(round(index, 1), as.Date(16001:17000)) # xts package for time series data
-names(data) <- paste("Fund", 1:4, sep = "_")
-returns <- xdiff_returns(data, 1)
-
+returns <- xdiff_returns(sample_index, 1)
 efff(returns, rg = 0.01039)
 ```
 

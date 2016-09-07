@@ -4,7 +4,7 @@
 \alias{mmadjust}
 \title{Adjust min & max}
 \usage{
-mmadjust(x, min, max)
+mmadjust(x, min = NA, max = NA)
 }
 \arguments{
 \item{x}{numeric vector}
@@ -15,5 +15,7 @@ Adjust min & max about numeric vector
 \examples{
 x <- c(NA, 1:100*.01, NA)
 mmadjust(x, .2, .8)
+mmadjust(x, .2)
+mmadjust(x, , .8)
 }
 

@@ -8,8 +8,10 @@
 #' @examples
 #' x <- c(NA, 1:100*.01, NA)
 #' mmadjust(x, .2, .8)
+#' mmadjust(x, .2)
+#' mmadjust(x, , .8)
 
-mmadjust <- function(x, min, max){
+mmadjust <- function(x, min = NA, max = NA){
 
   # pre
   stopifnot(is.numeric(x))

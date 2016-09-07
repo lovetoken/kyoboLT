@@ -16,6 +16,7 @@ efff(returns, short = "no", max.allocation = NULL, risk.premium.up = 0.9,
 Efficient Frontier using excess earning rate
 }
 \examples{
-xdiff_returns(sample_index, x = 1) \%>\% efff(rg = .01, rfr = .001)
+fortpolio <- xdiff_returns(sample_index, x = 1) \%>\% efff(rg = .01, rfr = .01, plot = F)
+fortpolio
 }
 

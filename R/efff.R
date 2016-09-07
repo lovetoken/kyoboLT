@@ -5,13 +5,15 @@
 #' @param plot logical value, return the plot?
 #' @export
 #' @examples
-#' xdiff_returns(sample_index, x = 1) %>% efff(rg = .01, rfr = .001)
+#' fortpolio <- xdiff_returns(sample_index, x = 1) %>% efff(rg = .01, rfr = .01, plot = F)
+#' fortpolio
 
 efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up = .9, risk.increment = .0001,
                  rg = NA, plot = T, rfr = 0, rounding = NULL){
 
   # pre
-  stopifnot(require(quadprog)); stopifnot(require(dplyr)); stopifnot(require(ggplot2))
+  stopifnot(require(quadprog))
+  stopifnot(require(dplyr)); stopifnot(require(ggplot2))
 
   # content : origen code >> `eff.frontier()`
   returns <- returns - rfr
@@ -59,9 +61,9 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
   # rounding
 
   if(is.null(rounding)){
-    pool <- as.data.frame(eff)
+    pool <- as.data.frame(eff) %>% mutate(Exp_Return = Exp_Return + rfr)
   } else {
-    pool <- as.data.frame(eff) %>% round(rounding)
+    pool <- as.data.frame(eff) %>% mutate(Exp_Return = Exp_Return + rfr) %>% round(rounding)
   }
 
   # condition rg

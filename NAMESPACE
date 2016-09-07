@@ -3,6 +3,7 @@
 export(assess_rank)
 export(assess_returns)
 export(cormat)
+export(descr)
 export(efff)
 export(mmadjust)
 export(mvp)

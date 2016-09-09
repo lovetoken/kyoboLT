@@ -16,14 +16,14 @@
 
 tmplot <- function(xts, mv = c(20, 60, 120), plotly = F, ...){
 
-  # pre
+  ## pre
   stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(ggplot2)); stopifnot(require(plotly)); stopifnot(require(reshape2))
   stopifnot(is.numeric(mv))
 
   mv <- as.integer(mv)
   mv1 <- mv[1]; mv2 <- mv[2]; mv3 <- mv[3]
 
-  # content
+  ## content
   PD1_1 <- xts %>%
     coredata %>%
     data.frame(Index = index(xts)) %>%
@@ -59,7 +59,7 @@ tmplot <- function(xts, mv = c(20, 60, 120), plotly = F, ...){
     facet_grid(variable ~ ., scales = "free", ...) +
     labs(x = "", y = "")
 
-  # return
+  ## return
   if(plotly) ggplotly(P) else P
 
 }
@@ -81,26 +81,26 @@ tmplot <- function(xts, mv = c(20, 60, 120), plotly = F, ...){
 
 tm1plot <- function(xts, choice.stock, mv = c(20, 60, 120), plotly = F, ...){
 
-  # pre
+  ## pre
   stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(ggplot2)); stopifnot(require(plotly)); stopifnot(require(reshape2))
   stopifnot(is.character(choice.stock)); stopifnot(is.numeric(mv))
 
   mv <- as.integer(mv)
   mv1 <- mv[1]; mv2 <- mv[2]; mv3 <- mv[3]
 
-  # content
-  ## subset dataset
+  ## content
+  ### subset dataset
   D <- subset(xts, select = choice.stock) %>% data.frame(date = index(.), .)
 
-  ## melt for ggplot plotting
+  ### melt for ggplot plotting
   PD <- melt(D, id = 1)
 
-  ## base ggplot
+  ### base ggplot
   P <- ggplot(PD, aes(x = date, y = value, group = variable)) +
     geom_line(size = .8, color = "grey") + labs(x = "Date", y = "") +
     theme(axis.text.x = element_text(angle = 90))
 
-  ## moving average line
+  ### moving average line
   PD1_1 <- subset(xts, select = choice.stock) %>%
     rollapplyr(mv1, function(x) mean(x, na.rm = T), na.pad = T) %>%
     coredata %>%
@@ -125,7 +125,7 @@ tm1plot <- function(xts, choice.stock, mv = c(20, 60, 120), plotly = F, ...){
     facet_grid(. ~ variable, scales = "free", ...) +
     guides(fill = F) + labs(x = "", y = "")
 
-  # return
+  ## return
   if(plotly) ggplotly(P) else P
 
 }

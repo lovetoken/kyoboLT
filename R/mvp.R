@@ -12,12 +12,12 @@
 
 mvp <- function(returns.xts, precision = .01, rfr = 0, rg = NA, plot = T, ...){
 
-  # pre
+  ## pre
   stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(dplyr)); stopifnot(require(ggplot2)); stopifnot(require(formattable))
   stopifnot(is.xts(returns.xts)); stopifnot(is.numeric(precision)); stopifnot(is.numeric(rfr))
 
-  # content
-  ## pool weight `W`
+  ## content
+  ### pool weight `W`
   n <- dim(returns.xts)[2]
   poolset <- seq(0, 1, by = precision) %>%
     rep(n) %>%
@@ -29,12 +29,12 @@ mvp <- function(returns.xts, precision = .01, rfr = 0, rg = NA, plot = T, ...){
   W <- poolset[rowSums(poolset) == 1, ] %>% t
   attr(W, "dimnames")[[1]] <- names(returns.xts)
 
-  ## ready `mu`
+  ### ready `mu`
   mu <- returns.xts %>% colMeans(na.rm = T)
 
   mu_p <- c(t(W) %*% mu)
 
-  ## ready `sigma`
+  ### ready `sigma`
   sigma <- cov(returns.xts, use = "pairwise.complete.obs")
   var_p <- diag(t(W) %*% sigma %*% W)
 
@@ -45,7 +45,7 @@ mvp <- function(returns.xts, precision = .01, rfr = 0, rg = NA, plot = T, ...){
   res$Method <- c("Minimum Variance Portfolio", "Market Portfolio")
   res$Point_color <- c("blue", "red")
 
-  ## ploting
+  ### ploting
   if(plot){
 
     P <- ggplot(pool, aes(x = Volatility, y = Portfolio_Returns)) +
@@ -75,7 +75,7 @@ mvp <- function(returns.xts, precision = .01, rfr = 0, rg = NA, plot = T, ...){
 
   print(P)
 
-  # return
+  ## return
   attr(res, "poolset") <- pool
   return(res)
 

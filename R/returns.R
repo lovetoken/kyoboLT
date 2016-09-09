@@ -12,7 +12,7 @@
 
 xdiff_returns <- function(xts, x = 1, log.returns = F, start.omit = T){
 
-  # pre
+  ## pre
   stopifnot(require(dplyr)); stopifnot(require(xts))
   x <- as.integer(x)
 
@@ -37,7 +37,7 @@ xdiff_returns <- function(xts, x = 1, log.returns = F, start.omit = T){
 
   attr(returns, "x") <- x
 
-  # return
+  ## return
   returns
 
 }
@@ -56,7 +56,7 @@ xdiff_returns <- function(xts, x = 1, log.returns = F, start.omit = T){
 
 xdiffs_returns <- function(xts, x, log.returns = F, start.omit = T){
 
-  # pre
+  ## pre
   stopifnot(require(dplyr)); stopifnot(require(xts))
   stopifnot(nrow(xts) == length(x))
 
@@ -95,7 +95,7 @@ xdiffs_returns <- function(xts, x, log.returns = F, start.omit = T){
 
   attr(returns, "x") <- x
 
-  # return
+  ## return
   returns
 
 }

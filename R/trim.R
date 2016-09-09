@@ -10,10 +10,10 @@
 
 trim <- function(data, method = "trailing"){
 
-  # pre
+  ## pre
   stopifnot(is.character(data)); stopifnot(method %in% c("leading", "trailing"))
 
-  # content
+  ## content
   if(method == "leading"){
 
     res <- sub("^\\s+", "", data)
@@ -24,7 +24,7 @@ trim <- function(data, method = "trailing"){
 
   }
 
-  # return
+  ## return
   res
 
 }

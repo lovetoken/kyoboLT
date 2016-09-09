@@ -14,10 +14,10 @@
 
 assess_returns <- function(returns.xts, method = c("mean", "sd", "S.R"), ...){
 
-  # pre
+  ## pre
   stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(formattable))
 
-  # content
+  ## content
   if(method == "mean"){
 
     listup <- sort(sapply(returns.xts, mean, na.rm = T), decreasing = T)
@@ -47,7 +47,7 @@ assess_returns <- function(returns.xts, method = c("mean", "sd", "S.R"), ...){
 
   }
 
-  # return
+  ## return
   res
 
 }
@@ -62,10 +62,10 @@ assess_returns <- function(returns.xts, method = c("mean", "sd", "S.R"), ...){
 
 assess_rank <- function(returns.xts, choice.stock, step = F, ...){
 
-  # pre
+  ## pre
   stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(ggplot2))
 
-  # content
+  ## content
   rank_output <- apply(returns.xts, 1, function(x) rank(-x, ties.method = "max", na.last = "keep")) %>% t
   length <- apply(rank_output, 1, function(x) max(x, na.rm = T))
   pd <- as.data.frame(cbind(subset(rank_output, select = choice.stock), length))
@@ -77,7 +77,7 @@ assess_rank <- function(returns.xts, choice.stock, step = F, ...){
     }, error = function(e) print("all NA")
   )
 
-  # plotting
+  ## plotting
   p <- ggplot(pd, aes(x = row.names(pd), y = rank, group = NA, label = label))
 
   if(step){
@@ -98,7 +98,7 @@ assess_rank <- function(returns.xts, choice.stock, step = F, ...){
 
     }
 
-  # res
+  ## res
   names(pd)[1] <- paste0(choice.stock, "_rank")
   pd
 

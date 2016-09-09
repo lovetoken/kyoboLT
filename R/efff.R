@@ -11,11 +11,11 @@
 efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up = .9, risk.increment = .0001,
                  rg = NA, plot = T, rfr = 0, rounding = NULL){
 
-  # pre
+  ## pre
   stopifnot(require(quadprog))
   stopifnot(require(dplyr)); stopifnot(require(ggplot2))
 
-  # content : origen code >> `eff.frontier()`
+  ## content : origen code >> `eff.frontier()`
   returns <- returns - rfr
   covariance <- cov(returns)
   n <- ncol(covariance)
@@ -58,15 +58,15 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
     loop <- loop + 1
   }
 
-  # rounding
+  ## rounding
 
   if(is.null(rounding)){
-    pool <- as.data.frame(eff) %>% mutate(Exp_Return = Exp_Return + rfr)
+    pool <- as.data.frame(eff)
   } else {
-    pool <- as.data.frame(eff) %>% mutate(Exp_Return = Exp_Return + rfr) %>% round(rounding)
+    pool <- as.data.frame(eff) %>% round(rounding)
   }
 
-  # condition rg
+  ## condition rg
 
   if(!is.na(rg)){
 
@@ -80,7 +80,7 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
 
   }
 
-  # ploting
+  ## ploting
 
   P <- ggplot(pool, aes(x = Std_Dev, y = Exp_Return)) +
     geom_point(size = .1, alpha = .5) +
@@ -89,7 +89,9 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
 
   if(plot) return(P)
 
-  # return
+  # res <- res %>% mutate(Exp_Return = Exp_Return + rfr)
+
+  ## return
   print(P)
   attr(res, "poolset") <- pool %>% tbl_df
   return(res)

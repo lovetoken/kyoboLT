@@ -13,14 +13,14 @@
 
 mmadjust <- function(x, min = NA, max = NA){
 
-  # pre
+  ## pre
   stopifnot(is.numeric(x))
 
-  # content
+  ## content
   x[x < min] <- min
   x[x > max] <- max
 
-  # return
+  ## return
   x
 
 }

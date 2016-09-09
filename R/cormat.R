@@ -7,9 +7,9 @@
 
 cormat <- function(dat, pch = '.', ...){
 
-  # pre
+  ## pre
   stopifnot(require(psych))
 
-  # content
+  ## content
   pairs.panels(dat, gap = 0, ellipses = F, pch = pch, hist.col = "lavender", col = "dodgerblue", lwd = 2, ...)
 }

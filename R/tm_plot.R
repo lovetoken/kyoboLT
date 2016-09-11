@@ -79,53 +79,53 @@ tmplot <- function(xts, mv = c(20, 60, 120), plotly = F, ...){
 #'
 #' tm1plot(data, "KS11.Close")
 
-tm1plot <- function(xts, choice.stock, mv = c(20, 60, 120), plotly = F, ...){
+# tm1plot <- function(xts, choice.stock, mv = c(20, 60, 120), plotly = F, ...){
 
-  ## pre
-  stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(ggplot2)); stopifnot(require(plotly)); stopifnot(require(reshape2))
-  stopifnot(is.character(choice.stock)); stopifnot(is.numeric(mv))
+#   ## pre
+#   stopifnot(require(dplyr)); stopifnot(require(xts)); stopifnot(require(ggplot2)); stopifnot(require(plotly)); stopifnot(require(reshape2))
+#   stopifnot(is.character(choice.stock)); stopifnot(is.numeric(mv))
 
-  mv <- as.integer(mv)
-  mv1 <- mv[1]; mv2 <- mv[2]; mv3 <- mv[3]
+#   mv <- as.integer(mv)
+#   mv1 <- mv[1]; mv2 <- mv[2]; mv3 <- mv[3]
 
-  ## content
-  ### subset dataset
-  D <- subset(xts, select = choice.stock) %>% data.frame(date = index(.), .)
+#   ## content
+#   ### subset dataset
+#   D <- subset(xts, select = choice.stock) %>% data.frame(date = index(.), .)
 
-  ### melt for ggplot plotting
-  PD <- melt(D, id = 1)
+#   ### melt for ggplot plotting
+#   PD <- melt(D, id = 1)
 
-  ### base ggplot
-  P <- ggplot(PD, aes(x = date, y = value, group = variable)) +
-    geom_line(size = .8, color = "grey") + labs(x = "Date", y = "") +
-    theme(axis.text.x = element_text(angle = 90))
+#   ### base ggplot
+#   P <- ggplot(PD, aes(x = date, y = value, group = variable)) +
+#     geom_line(size = .8, color = "grey") + labs(x = "Date", y = "") +
+#     theme(axis.text.x = element_text(angle = 90))
 
-  ### moving average line
-  PD1_1 <- subset(xts, select = choice.stock) %>%
-    rollapplyr(mv1, function(x) mean(x, na.rm = T), na.pad = T) %>%
-    coredata %>%
-    data.frame(date = index(xts)) %>%
-    melt(id = "date", value.name = "moving_average_1")
+#   ### moving average line
+#   PD1_1 <- subset(xts, select = choice.stock) %>%
+#     rollapplyr(mv1, function(x) mean(x, na.rm = T), na.pad = T) %>%
+#     coredata %>%
+#     data.frame(date = index(xts)) %>%
+#     melt(id = "date", value.name = "moving_average_1")
 
-  PD1_2 <- subset(xts, select = choice.stock) %>%
-    rollapplyr(mv2, function(x) mean(x, na.rm = T), na.pad = T) %>%
-    coredata %>%
-    data.frame(date = index(xts)) %>%
-    melt(id = "date", value.name = "moving_average_2")
+#   PD1_2 <- subset(xts, select = choice.stock) %>%
+#     rollapplyr(mv2, function(x) mean(x, na.rm = T), na.pad = T) %>%
+#     coredata %>%
+#     data.frame(date = index(xts)) %>%
+#     melt(id = "date", value.name = "moving_average_2")
 
-  PD1_3 <- subset(xts, select = choice.stock) %>%
-    rollapplyr(mv3, function(x) mean(x, na.rm = T), na.pad = T) %>%
-    coredata %>%
-    data.frame(date = index(xts)) %>%
-    melt(id = "date", value.name = "moving_average_3")
+#   PD1_3 <- subset(xts, select = choice.stock) %>%
+#     rollapplyr(mv3, function(x) mean(x, na.rm = T), na.pad = T) %>%
+#     coredata %>%
+#     data.frame(date = index(xts)) %>%
+#     melt(id = "date", value.name = "moving_average_3")
 
-  P <- P + geom_line(data = PD1_1, aes(y = moving_average_1), color="purple") +
-    geom_line(data=PD1_2, aes(y = moving_average_2), color = "blue") +
-    geom_line(data=PD1_3, aes(y = moving_average_3), color = "red") +
-    facet_grid(. ~ variable, scales = "free", ...) +
-    guides(fill = F) + labs(x = "", y = "")
+#   P <- P + geom_line(data = PD1_1, aes(y = moving_average_1), color="purple") +
+#     geom_line(data=PD1_2, aes(y = moving_average_2), color = "blue") +
+#     geom_line(data=PD1_3, aes(y = moving_average_3), color = "red") +
+#     facet_grid(. ~ variable, scales = "free", ...) +
+#     guides(fill = F) + labs(x = "", y = "")
 
-  ## return
-  if(plotly) ggplotly(P) else P
+#   ## return
+#   if(plotly) ggplotly(P) else P
 
-}
+# }

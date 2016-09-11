@@ -17,7 +17,7 @@ xdiffs_returns(xts, x, log.returns = F, start.omit = T)
 xts type about returns dataset
 }
 \description{
-각기 <U+FFFD>�른 x <U+FFFD>�차 값을 기�<U+FFFD><U+FFFD>�로 <U+FFFD>�익률을 계산<U+FFFD>�니<U+FFFD><U+FFFD>. <U+FFFD>�라<U+FFFD><U+FFFD> \code{x}<U+FFFD><U+FFFD> \code{n = nrow(xts)} 만큼<U+FFFD><U+FFFD> 벡터<U+FFFD>�<U+FFFD>�값<U+FFFD><U+FFFD> 받아<U+FFFD><U+FFFD> <U+FFFD>�니<U+FFFD><U+FFFD>.
+각기 다른 x 시차 값을 기준으로 수익률을 계산합니다. 따라서 \code{x}는 \code{n = nrow(xts)} 만큼의 벡터타입값을 받아야 합니다.
 }
 \examples{
 xdiffs_returns(sample_index, x = 0:19)

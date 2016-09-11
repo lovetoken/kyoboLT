@@ -9,7 +9,7 @@
 #' fortpolio
 
 efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up = .9, risk.increment = .0001,
-                 rg = NA, plot = T, rfr = 0, rounding = NULL){
+                 rg = NA, plot = F, rfr = 0, rounding = NULL){
 
   ## pre
   stopifnot(require(quadprog))
@@ -79,6 +79,8 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
     res$Method <- c("Optimal Portfolio")
 
   }
+
+  res <- res %>% select(Method, everything())
 
   ## ploting
 

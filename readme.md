@@ -3,7 +3,7 @@
 
 # `kyoboLT` package in R 
 
-<img src="./image/under-construction-banner.png" width="20%">
+<br><img src="./image/under-construction-banner.png" width="20%"><br>
 
 Useful R package for kyobo retirement pension marketing team.  
 

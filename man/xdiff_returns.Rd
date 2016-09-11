@@ -17,7 +17,7 @@ xdiff_returns(xts, x = 1, log.returns = F, start.omit = T)
 xts type about returns dataset
 }
 \description{
-<U+FFFD>�괄<U+FFFD>�으�<U+FFFD> 모든 x <U+FFFD>�차 값을 기�<U+FFFD><U+FFFD>�로 <U+FFFD>�익률을 계산<U+FFFD>�니<U+FFFD><U+FFFD>.
+일괄적으로 모든 x 시차 값을 기준으로 수익률을 계산합니다.
 }
 \examples{
 xdiff_returns(sample_index, 1)

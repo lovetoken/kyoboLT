@@ -51,7 +51,7 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
     dvec <- colMeans(returns) * i
 
     sol <- solve.QP(covariance, dvec = dvec, Amat = Amat, bvec = bvec, meq = meq)
-    eff[loop, "Std_Dev"] <- sqrt(sum(sol$solution * colSums((covariance*sol$solution))))
+    eff[loop, "Std_Dev"] <- sqrt(sum(sol$solution * colSums(covariance*sol$solution)))
     eff[loop, "Exp_Return"] <- as.numeric(sol$solution %*% colMeans(returns))
     eff[loop, "sharpe"] <- eff[loop,"Exp_Return"] / eff[loop,"Std_Dev"]
     eff[loop, 1:n] <- sol$solution
@@ -89,12 +89,10 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
     geom_point(data = res, aes(x = Std_Dev, y = Exp_Return, color = Method), size = 2) +
     labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "")
 
-  if(plot) return(P)
-
   # res <- res %>% mutate(Exp_Return = Exp_Return + rfr)
 
   ## return
-  print(P)
+  if(plot) print(P)
   attr(res, "poolset") <- pool %>% tbl_df
   return(res)
 

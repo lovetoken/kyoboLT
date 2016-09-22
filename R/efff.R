@@ -12,7 +12,8 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
                  rg = NA, plot = T, rfr = 0, rounding = NULL){
 
   ## pre
-  stopifnot(require(quadprog)); stopifnot(require(dplyr)); stopifnot(require(ggplot2))
+  stopifnot(require(quadprog)); stopifnot(require(dplyr)); stopifnot(require(ggplot2)); stopifnot(require(ggrepel))
+
 
   ## content : origen code >> `eff.frontier()`
   returns <- returns - rfr
@@ -77,8 +78,13 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
 
   ## ploting
 
-  P <- ggplot(pool, aes(x = Std_Dev, y = Excess_Return)) +
-    geom_point(size = .1, alpha = .5) +
+  pd1 <- descr(returns, c("mean", "sd")) %>% tbl_df %>%
+    mutate(labels = rownames(.)) %>% rename(Excess_Return = mean, Std_Dev = sd)
+
+  P <- ggplot() +
+    geom_point(data = pd1, aes(x = Std_Dev, y = Excess_Return), size = 1, col = "grey") +
+    geom_text_repel(data = pd1, aes(x = Std_Dev, y = Excess_Return, label = labels), size = 2.5, col = "grey", segment.color = NULL) +
+    geom_point(data = pool, aes(x = Std_Dev, y = Excess_Return), size = .1, alpha = .3) +
     geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = Method), size = 2) +
     labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "")
 

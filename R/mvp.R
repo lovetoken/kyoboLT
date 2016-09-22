@@ -8,7 +8,8 @@
 #' @return data.frame type about assessment result
 #' @export
 #' @examples
-#' sample_index %>% xdiff_returns(1) %>% mvp(rfr = 0.001)
+#' returns <- xdiff_returns(sample_index, 1)
+#' mvp(returns, rfr = 0.001)
 
 mvp <- function(returns.xts, precision = .01, rfr = 0, rg = NA, plot = T, ...){
 

@@ -1,14 +1,22 @@
 ---
+title: "kyoboLT package in R"
 output:
-  rmdformats::readthedown:
+  rmdformats::material:
+    lightbox: F
+    thumbnails: F
     fig_height: 5
     fig_width: 6.5
     keep_md: yes
 ---
 
 ```{r echo=F, message=FALSE, warning=FALSE}
-pacman::p_load("pacman", "dplyr", "knitr", "rmarkdown", "rmdformats", "xts", "reshape2", "formattable", "kyoboLT")
+## load packages
+pacman::p_load("pacman", "dplyr", "knitr", "rmarkdown", "rmdformats", "xts", "reshape2", "formattable", "kyoboLT", "ggplot2")
 
+## ggplot2 theme set
+theme_set(theme_bw() + theme(axis.text.x = element_text(angle = 90)))
+
+## option
 opts_chunk$set(fig.align = "center", warning = F, message = F)
 ```
 
@@ -57,8 +65,7 @@ Efficient Frontier using excess earning rate
 
 ```{r}
 returns <- xdiff_returns(sample_index, 1)
-fortpolio <-efff(returns, rg = 0.01039)
-fortpolio
+efff(returns, rg = 0.01039, rfr = 0.001)
 ```
 
 # Useful manipulation

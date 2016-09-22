@@ -5,7 +5,7 @@
 \title{Efficient Frontier}
 \usage{
 efff(returns, short = "no", max.allocation = NULL, risk.premium.up = 0.9,
-  risk.increment = 1e-04, rg = NA, plot = F, rfr = 0, rounding = NULL)
+  risk.increment = 1e-04, rg = NA, plot = T, rfr = 0, rounding = NULL)
 }
 \arguments{
 \item{rg}{numeric value, returns of goal}
@@ -13,10 +13,10 @@ efff(returns, short = "no", max.allocation = NULL, risk.premium.up = 0.9,
 \item{plot}{logical value, return the plot?}
 }
 \description{
-Efficient Frontier using excess earning rate
+Efficient Frontier using excess returns
 }
 \examples{
-fortpolio <- xdiff_returns(sample_index, x = 1) \%>\% efff(rg = .01, rfr = .01, plot = F)
-fortpolio
+returns <- xdiff_returns(sample_index, x = 1)
+efff(returns, rg = .01, rfr = .001)
 }
 

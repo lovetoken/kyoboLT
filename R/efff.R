@@ -5,11 +5,11 @@
 #' @param plot logical value, return the plot?
 #' @export
 #' @examples
-#' fortpolio <- xdiff_returns(sample_index, x = 1) %>% efff(rg = .01, rfr = .01, plot = F)
-#' fortpolio
+#' returns <- xdiff_returns(sample_index, x = 1)
+#' efff(returns, rg = .01, rfr = .001)
 
 efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up = .9, risk.increment = .0001,
-                 rg = NA, plot = F, rfr = 0, rounding = NULL){
+                 rg = NA, plot = T, rfr = 0, rounding = NULL){
 
   ## pre
   stopifnot(require(quadprog)); stopifnot(require(dplyr)); stopifnot(require(ggplot2))

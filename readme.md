@@ -1,3 +1,4 @@
+# kyoboLT package in R
 
 
 
@@ -150,22 +151,18 @@ Efficient Frontier using excess earning rate
 
 ```r
 returns <- xdiff_returns(sample_index, 1)
-fortpolio <-efff(returns, rg = 0.01039)
+efff(returns, rg = 0.01039, rfr = 0.001)
 ```
 
 <img src="README_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
-```r
-fortpolio
-```
-
 ```
 ##                         Method    Fund_1    Fund_2    Fund_3    Std_Dev
-## 5321 Returns of goal Portfolio 0.1713768 0.6004271 0.2281961 0.06338761
-## 3210         Optimal Portfolio 0.1650875 0.4643891 0.3705234 0.05405376
-##       Exp_Return    sharpe
-## 5321 0.010390006 0.1639123
-## 3210 0.009104768 0.1684391
+## 6963 Returns of goal Portfolio 0.1762689 0.7062416 0.1174895 0.07242801
+## 3732         Optimal Portfolio 0.1666427 0.4980280 0.3353293 0.05605683
+##      Excess_Return    sharpe
+## 6963   0.010389703 0.1434487
+## 3732   0.008422577 0.1502507
 ```
 
 # Useful manipulation

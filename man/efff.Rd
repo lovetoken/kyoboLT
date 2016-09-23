@@ -5,12 +5,11 @@
 \title{Efficient Frontier}
 \usage{
 efff(returns, short = "no", max.allocation = NULL, risk.premium.up = 0.9,
-  risk.increment = 1e-04, rg = NA, plot = T, rfr = 0, rounding = NULL)
+  risk.increment = 1e-04, rg = NA, plot.only.efff = T, rfr = 0,
+  rounding = NULL)
 }
 \arguments{
 \item{rg}{numeric value, returns of goal}
-
-\item{plot}{logical value, return the plot?}
 }
 \description{
 Efficient Frontier using excess returns

@@ -2,14 +2,13 @@
 #'
 #' Efficient Frontier using excess returns
 #' @param rg numeric value, returns of goal
-#' @param plot logical value, return the plot?
 #' @export
 #' @examples
 #' returns <- xdiff_returns(sample_index, x = 1)
 #' efff(returns, rg = .01, rfr = .001)
 
 efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up = .9, risk.increment = .0001,
-                 rg = NA, plot = T, rfr = 0, rounding = NULL){
+                 rg = NA, plot.only.efff = T, rfr = 0, rounding = NULL){
 
   ## pre
   stopifnot(require(quadprog)); stopifnot(require(dplyr)); stopifnot(require(ggplot2)); stopifnot(require(ggrepel))
@@ -78,20 +77,29 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
 
   ## ploting
 
-  pd1 <- descr(returns, c("mean", "sd")) %>% tbl_df %>%
-    mutate(labels = rownames(.)) %>% rename(Excess_Return = mean, Std_Dev = sd)
+  if(plot.only.efff){
 
-  P <- ggplot() +
-    geom_point(data = pd1, aes(x = Std_Dev, y = Excess_Return), size = 1, col = "grey") +
-    geom_text_repel(data = pd1, aes(x = Std_Dev, y = Excess_Return, label = labels), size = 2.5, col = "grey", segment.color = NULL) +
-    geom_point(data = pool, aes(x = Std_Dev, y = Excess_Return), size = .1, alpha = .3) +
-    geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = Method), size = 2) +
-    labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "")
+    P <- ggplot() +
+      geom_point(data = pool, aes(x = Std_Dev, y = Excess_Return), size = .5, color = "#DAC0C0") +
+      geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = Method), size = 2) +
+      labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "")
 
-  # res <- res %>% mutate(Excess_Return = Excess_Return + rfr)
+  } else {
+
+    pd1 <- descr(returns, c("mean", "sd")) %>% tbl_df %>%
+      mutate(labels = rownames(.)) %>% rename(Excess_Return = mean, Std_Dev = sd)
+
+    P <- ggplot() +
+      geom_point(data = pool, aes(x = Std_Dev, y = Excess_Return), size = .5, color = "#DAC0C0") +
+      geom_point(data = pd1, aes(x = Std_Dev, y = Excess_Return), size = 1, col = "#666666") +
+      geom_text_repel(data = pd1, aes(x = Std_Dev, y = Excess_Return, label = labels), col = "#666666", size = 3) +
+      geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = Method), size = 2) +
+      labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "")
+
+  }
 
   ## return
-  if(plot) print(P)
+  print(P)
   attr(res, "poolset") <- pool %>% tbl_df
   return(res)
 

@@ -81,8 +81,7 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
 
     P <- ggplot() +
       geom_point(data = pool, aes(x = Std_Dev, y = Excess_Return), size = .5, color = "#DAC0C0") +
-      geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = Method), size = 2) +
-      labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "")
+      geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = Method), size = 2)
 
   } else {
 
@@ -93,13 +92,15 @@ efff <- function(returns, short = "no", max.allocation = NULL, risk.premium.up =
       geom_point(data = pool, aes(x = Std_Dev, y = Excess_Return), size = .5, color = "#DAC0C0") +
       geom_point(data = pd1, aes(x = Std_Dev, y = Excess_Return), size = 1, col = "#666666") +
       geom_text_repel(data = pd1, aes(x = Std_Dev, y = Excess_Return, label = labels), col = "#666666", size = 3) +
-      geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = Method), size = 2) +
-      labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "")
+      geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = Method), size = 2)
 
   }
 
   ## return
-  print(P)
+  print({
+    P + labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "") +
+      theme(plot.title = element_text(size = rel(2)))
+  })
   attr(res, "poolset") <- pool %>% tbl_df
   return(res)
 

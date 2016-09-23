@@ -151,7 +151,7 @@ Efficient Frontier using excess earning rate
 
 ```r
 returns <- xdiff_returns(sample_index, 1)
-efff(returns, rg = 0.01039, rfr = 0.001)
+efff(returns, rg = 0.01039, rfr = 0.001, plot.only.efff = F)
 ```
 
 <img src="README_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />

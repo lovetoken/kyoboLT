@@ -1,7 +1,3 @@
-# kyoboLT package in R
-
-
-
 # `kyoboLT` package in R 
 
 <br><img src="./image/under-construction-banner.png" width="20%"><br>

@@ -62,16 +62,14 @@ efff <- function(returns, rg = NA, rfr = 0, short = "no", max.allocation = NULL,
   if(!is.na(rg)){
 
     res <- pool[c(which.min((pool$Excess_Return - rg)^2), which.max(pool$sharpe)), ]
-    res$Method <- c("Returns of goal Portfolio", "Optimal Portfolio")
+    rownames(res) <- c("Returns of goal Portfolio", "Optimal Portfolio")
 
   } else {
 
     res <- pool[c(which.max(pool$sharpe)), ]
-    res$Method <- c("Optimal Portfolio")
+    rownames(res) <- c("Optimal Portfolio")
 
   }
-
-  res <- res %>% select(Method, everything())
 
   ## ploting
 
@@ -79,7 +77,7 @@ efff <- function(returns, rg = NA, rfr = 0, short = "no", max.allocation = NULL,
 
     P <- ggplot() +
       geom_point(data = pool, aes(x = Std_Dev, y = Excess_Return), size = .5, color = "#DAC0C0") +
-      geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = Method), size = 2)
+      geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = rownames(res)), size = 2)
 
   } else {
 
@@ -90,11 +88,12 @@ efff <- function(returns, rg = NA, rfr = 0, short = "no", max.allocation = NULL,
       geom_point(data = pool, aes(x = Std_Dev, y = Excess_Return), size = .5, color = "#DAC0C0") +
       geom_point(data = pd1, aes(x = Std_Dev, y = Excess_Return), size = 1, col = "#666666") +
       geom_text_repel(data = pd1, aes(x = Std_Dev, y = Excess_Return, label = labels), col = "#666666", size = 3) +
-      geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = Method), size = 2)
+      geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = rownames(res)), size = 2)
 
   }
 
   ## return
+  
   print({
     P + labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "") +
       theme(plot.title = element_text(size = rel(1.4)))

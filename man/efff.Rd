@@ -4,9 +4,8 @@
 \alias{efff}
 \title{Efficient Frontier}
 \usage{
-efff(returns, short = "no", max.allocation = NULL, risk.premium.up = 0.9,
-  risk.increment = 1e-04, rg = NA, plot.only.efff = T, rfr = 0,
-  rounding = NULL)
+efff(returns, rg = NA, rfr = 0, short = "no", max.allocation = NULL,
+  risk.premium.up = 0.9, risk.increment = 1e-04, plot.only.efff = T)
 }
 \arguments{
 \item{rg}{numeric value, returns of goal}

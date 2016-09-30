@@ -1,3 +1,7 @@
+# kyoboLT package in R
+
+
+
 # `kyoboLT` package in R 
 
 <br><img src="./image/under-construction-banner.png" width="20%"><br>
@@ -153,12 +157,12 @@ efff(returns, rg = 0.01039, rfr = 0.001, plot.only.efff = F)
 <img src="README_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
 ```
-##                         Method    Fund_1    Fund_2    Fund_3    Std_Dev
-## 6963 Returns of goal Portfolio 0.1762689 0.7062416 0.1174895 0.07242801
-## 3732         Optimal Portfolio 0.1666427 0.4980280 0.3353293 0.05605683
-##      Excess_Return    sharpe
-## 6963   0.010389703 0.1434487
-## 3732   0.008422577 0.1502507
+##                              Fund_1    Fund_2    Fund_3    Std_Dev
+## Returns of goal Portfolio 0.1762689 0.7062416 0.1174895 0.07242801
+## Optimal Portfolio         0.1666427 0.4980280 0.3353293 0.05605683
+##                           Excess_Return    sharpe
+## Returns of goal Portfolio   0.010389703 0.1434487
+## Optimal Portfolio           0.008422577 0.1502507
 ```
 
 # Useful manipulation
@@ -226,3 +230,32 @@ trim("  Wow!  ", method = "trailing")
 ```
 ## [1] "Wow!"
 ```
+
+# For template
+
+## `ky_colors()`
+
+
+```r
+demo.pal <- function(n, border = if (n < 32) "light gray" else NA,
+                     main = paste("color palettes;  n=", n),
+                     ch.col = c("rainbow(n, start=.7, end=.1)", "heat.colors(n)",
+                                "terrain.colors(n)", "topo.colors(n)", 
+                                "cm.colors(n)", "ky_colors(n)")){
+  
+    nt <- length(ch.col)
+    i <- 1:n; j <- n / nt; d <- j/6; dy <- 2*d
+    plot(i, i+d, type = "n", yaxt = "n", ylab = "", main = main)
+    
+    for(k in 1:nt){
+        rect(i-.5, (k-1)*j+ dy, i+.4, k*j, col = eval(parse(text = ch.col[k])), border = border)
+        text(2*j,  k * j + dy/4, ch.col[k])
+    }
+    
+}
+
+demo.pal(n = 16)
+```
+
+<img src="README_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+

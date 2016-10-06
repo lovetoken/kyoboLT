@@ -65,7 +65,8 @@ Efficient Frontier using excess earning rate
 
 ```{r}
 returns <- xdiff_returns(sample_index, 1)
-efff(returns, rg = 0.01039, rfr = 0.001, plot.only.efff = F)
+ef <- efff(returns, rg = 0.01039, rfr = 0.001, plot.only.efff = F)
+attr(ef, "poolset") %>% head
 ```
 
 # Useful manipulation

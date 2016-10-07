@@ -1,13 +1,10 @@
-# kyoboLT package in R
-
-
-
-# `kyoboLT` package in R 
+# kyoboLT package in R 
 
 <br><img src="./image/under-construction-banner.png" width="20%"><br>
 
 Useful R package for kyobo retirement pension marketing team.  
-License: GPL-3  
+ 
+ - License: GPL-3  
 
 # install `kyoboLT` package
 

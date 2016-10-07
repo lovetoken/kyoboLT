@@ -20,7 +20,7 @@ theme_set(theme_bw() + theme(axis.text.x = element_text(angle = 90)))
 opts_chunk$set(fig.align = "center", warning = F, message = F)
 ```
 
-# `kyoboLT` package in R 
+# kyoboLT package in R 
 
 <br><img src="./image/under-construction-banner.png" width="20%"><br>
 

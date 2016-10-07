@@ -25,6 +25,7 @@ opts_chunk$set(fig.align = "center", warning = F, message = F)
 <br><img src="./image/under-construction-banner.png" width="20%"><br>
 
 Useful R package for kyobo retirement pension marketing team.  
+License: GPL-3  
 
 # install `kyoboLT` package
 
@@ -113,5 +114,21 @@ demo.pal <- function(n, border = if (n < 32) "light gray" else NA,
 }
 
 demo.pal(n = 16)
+```
+
+# Visualization
+
+## `prop_waffle()`
+
+```{r}
+x <- c("Apple" = 1, "Banana" = 2, "Watermelon" = 3)
+prop_waffle(x, 1, 4, size = 1)
+prop_waffle(x, 1, 4, size = 1, colors = ky_colors(3), title = "Using ky_colors() Palettes")
+```
+
+## `cormat()`
+
+```{r}
+cormat(cars)
 ```
 

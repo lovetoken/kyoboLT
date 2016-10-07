@@ -7,6 +7,7 @@
 <br><img src="./image/under-construction-banner.png" width="20%"><br>
 
 Useful R package for kyobo retirement pension marketing team.  
+License: GPL-3  
 
 # install `kyoboLT` package
 
@@ -157,11 +158,19 @@ ef <- efff(returns, rg = 0.01039, rfr = 0.001, plot.only.efff = F)
 <img src="README_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
 ```r
-head(ef$poolset)
+attr(ef, "poolset") %>% head
 ```
 
 ```
-## NULL
+## # A tibble: 6 × 6
+##      Fund_1    Fund_2    Fund_3    Std_Dev Excess_Return    sharpe
+##       <dbl>     <dbl>     <dbl>      <dbl>         <dbl>     <dbl>
+## 1 0.1555268 0.2575933 0.5868799 0.04790466   0.006151036 0.1284016
+## 2 0.1555298 0.2576578 0.5868125 0.04790466   0.006151645 0.1284143
+## 3 0.1555327 0.2577222 0.5867451 0.04790466   0.006152253 0.1284270
+## 4 0.1555357 0.2577866 0.5866776 0.04790467   0.006152862 0.1284397
+## 5 0.1555387 0.2578511 0.5866102 0.04790467   0.006153471 0.1284524
+## 6 0.1555417 0.2579155 0.5865428 0.04790468   0.006154080 0.1284651
 ```
 
 # Useful manipulation
@@ -257,4 +266,31 @@ demo.pal(n = 16)
 ```
 
 <img src="README_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+
+# Visualization
+
+## `prop_waffle()`
+
+
+```r
+x <- c("Apple" = 1, "Banana" = 2, "Watermelon" = 3)
+prop_waffle(x, 1, 4, size = 1)
+```
+
+<img src="README_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+
+```r
+prop_waffle(x, 1, 4, size = 1, colors = ky_colors(3), title = "Using ky_colors() Palettes")
+```
+
+<img src="README_files/figure-html/unnamed-chunk-9-2.png" style="display: block; margin: auto;" />
+
+## `cormat()`
+
+
+```r
+cormat(cars)
+```
+
+<img src="README_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 

@@ -8,10 +8,10 @@
 #' efff(returns, rg = .01, rfr = .001)
 
 efff <- function(returns, rg = NA, rfr = 0, short = "no", max.allocation = NULL, risk.premium.up = .9,
-                 risk.increment = .0001, plot.only.efff = T){
+                 risk.increment = .0001, plot.only.efff = T, plotly = F){
 
   ## pre
-  stopifnot(require(quadprog)); stopifnot(require(dplyr)); stopifnot(require(ggplot2)); stopifnot(require(ggrepel))
+  stopifnot(require(quadprog)); stopifnot(require(dplyr)); stopifnot(require(ggplot2)); stopifnot(require(ggrepel)); stopifnot(require(plotly));
 
 
   ## content : origen code >> `eff.frontier()`
@@ -75,7 +75,7 @@ efff <- function(returns, rg = NA, rfr = 0, short = "no", max.allocation = NULL,
 
   if(plot.only.efff){
 
-    P <- ggplot() +
+    p1 <- ggplot() +
       geom_point(data = pool, aes(x = Std_Dev, y = Excess_Return), size = .5, color = "#DAC0C0") +
       geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = rownames(res)), size = 2)
 
@@ -84,20 +84,20 @@ efff <- function(returns, rg = NA, rfr = 0, short = "no", max.allocation = NULL,
     pd1 <- descr(returns, c("mean", "sd")) %>% tbl_df %>%
       mutate(labels = rownames(.)) %>% rename(Excess_Return = mean, Std_Dev = sd)
 
-    P <- ggplot() +
+    p1 <- ggplot() +
       geom_point(data = pool, aes(x = Std_Dev, y = Excess_Return), size = .5, color = "#DAC0C0") +
-      geom_point(data = pd1, aes(x = Std_Dev, y = Excess_Return), size = 1, col = "#666666") +
+      geom_point(data = pd1, aes(x = Std_Dev, y = Excess_Return, text = labels), size = 1, col = "#666666") +
       geom_text_repel(data = pd1, aes(x = Std_Dev, y = Excess_Return, label = labels), col = "#666666", size = 3) +
       geom_point(data = res, aes(x = Std_Dev, y = Excess_Return, color = rownames(res)), size = 2)
 
   }
 
+  p1 <- p1 + labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "") +
+    theme(plot.title = element_text(size = rel(1.4)))
+
   ## return
-  
-  print({
-    P + labs(title = paste0("Efficient Frontier (rfr = ", rfr, ")"), color = "") +
-      theme(plot.title = element_text(size = rel(1.4)))
-  })
+
+  if(plotly) print(ggplotly(p1)) else print(p1)
   attr(res, "poolset") <- pool %>% tbl_df
   return(res)
 

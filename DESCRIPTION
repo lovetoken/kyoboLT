@@ -1,7 +1,7 @@
 Package: kyoboLT
 Type: Package
 Title: Useful R package for kyobo retirement pension marketing team
-Version: 0.1.0.0093
+Version: 0.1.0.0094
 Author: Hyojin Song
 Maintainer: Hyojin Song <lt.lovetoken@gmail.com>
 Description: Useful R package for kyobo retirement pension marketing team

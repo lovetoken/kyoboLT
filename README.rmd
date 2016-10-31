@@ -13,56 +13,58 @@ output:
 ## load packages
 pacman::p_load("pacman", "dplyr", "knitr", "rmarkdown", "rmdformats", "xts", "reshape2", "formattable", "kyoboLT", "ggplot2")
 
-## ggplot2 theme set
-theme_set(theme_bw() + theme(axis.text.x = element_text(angle = 90)))
-
-## option
-opts_chunk$set(fig.align = "center", warning = F, message = F)
+## global option
+opts_chunk$set(fig.align = "center", warning = F, message = F) # for knitr
+theme_set(theme_bw() + theme(axis.text.x = element_text(angle = 90))) # for ggplot2
+set.seed(1004)
 ```
 
-# kyoboLT package in R 
-
-<br><img src="./image/under-construction-banner.png" width="20%"><br>
-
+**Under Construction**  
 Useful R package for kyobo retirement pension marketing team.  
-License: GPL-3  
 
-# install `kyoboLT` package
+# Overview
 
-```{r eval=F}
-devtools::install_github("lovetoken/kyoboLT")
-```
+본 패키지는 크게 3가지 성격을 가지고 있습니다.
 
-# Useful functions for time series data
+1. 자료 핸들링을 위한 편의함수 : `xdiff_returns()`, `mmadjust()`, `trim()` 등
+2. 시각화 템플릿을 통한 생산성 증대 : `tmplot()`, `ky_colors()`, `prop_waffle()`, `cormat()` 등
+3. 분석모듈 : `efff()` 등
 
-## `xdiff_returns()`
-
-```{r}
-data(sample_index)
-sample_index
-
-# basic 3 day returns
-xdiff_returns(sample_index, 3)
-# calculation 3 day log returns
-xdiff_returns(sample_index, 3, log.returns = T)
-# not omit about start time index
-xdiff_returns(sample_index, 3, start.omit = F)
-```
+# Example
 
 ## `tmplot()`
 
-Time series and (3 lines) moving average plot about all fund items
+시계열 자료가 있을 때 20, 50, 120일 이동평균선과 함께 플랏팅을 해줍니다.
+데이터프레임일때 동작하며 단변수일 경우
 
 ```{r}
 library("quantmod")
+data <- getSymbols("^ks11", from=Sys.Date()-1000, to = Sys.Date(), auto.assign = F)[,1]
+
+tmplot(data)
+```
+
+다변수일경우 입니다.
+
+```{r}
 data <- getSymbols("^ks11", from=Sys.Date()-1000, to = Sys.Date(), auto.assign = F)
 
 tmplot(data)
 ```
 
+## `xdiff_returns()`
+
+```{r}
+data(sample_index)
+
+sample_index
+xdiff_returns(sample_index)
+```
+
 ## `efff()`
 
-Efficient Frontier using excess earning rate
+수익률을 기반으로 효율적투자선을 그려줍니다.  
+이를 이용하여 최적수익률포트폴리오, 목표수익률포트폴리오에 대한 분석이 가능합니다.  
 
 ```{r}
 returns <- xdiff_returns(sample_index, 1)
@@ -70,11 +72,10 @@ ef <- efff(returns, rg = 0.01039, rfr = 0.001, plot.only.efff = F)
 attr(ef, "poolset") %>% head
 ```
 
-# Useful manipulation
-
 ## `mmadjust()`
 
-Adjust min & max about numeric vector
+최대 최소값을 임의의 값으로 보정시킵니다. 
+즉 임의값을 초과하는 부분이 보정됩니다.  
 
 ```{r}
 (x <- c(NA, 1:100*.01, NA))
@@ -83,7 +84,7 @@ mmadjust(x, .2, .8)
 
 ## `trim()`
 
-Trimming of whitespace in character
+정규표현식에 기반한 공백문자에 대한 trimming 을 제공합니다.  
 
 ```{r}
 trim("  Wow!  ", method = "leading")
@@ -91,9 +92,9 @@ trim("  Wow!  ", method = "trailing")
 "  Wow!  " %>% trim %>% trim(method = "leading")
 ```
 
-# For template
-
 ## `ky_colors()`
+
+자주사용하는 색에 대한 팔레트함수입니다.  
 
 ```{r}
 demo.pal <- function(n, border = if (n < 32) "light gray" else NA,
@@ -116,19 +117,35 @@ demo.pal <- function(n, border = if (n < 32) "light gray" else NA,
 demo.pal(n = 16)
 ```
 
-# Visualization
-
 ## `prop_waffle()`
+
+비율에 대한 와플차트를 제공합니다.  
 
 ```{r}
 x <- c("Apple" = 1, "Banana" = 2, "Watermelon" = 3)
 prop_waffle(x, 1, 4, size = 1)
-prop_waffle(x, 1, 4, size = 1, colors = ky_colors(3), title = "Using ky_colors() Palettes")
+prop_waffle(x, 1, 4, size = 1, colors = ky_colors(3, random = T), 
+            title = "Using ky_colors() Palettes")
 ```
 
 ## `cormat()`
+
+상관행렬도를 시각화하며 `psych::pairs.panels()` 에 기반합니다.  
 
 ```{r}
 cormat(cars)
 ```
 
+# Install
+
+github 원격저장소에 본 패키지 프로젝트가 담겨 있습니다.  
+devtools package 의 `install_github()` 함수를 통해 설치 가능합니다.  
+아래의 코드를 실행하세요.  
+
+```{r eval=F}
+devtools::install_github("lovetoken/kyoboLT")
+```
+
+# License
+
+[GPL-3](https://www.gnu.org/licenses/gpl-3.0.en.html)

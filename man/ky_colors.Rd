@@ -4,7 +4,7 @@
 \alias{ky_colors}
 \title{Color Palettes}
 \usage{
-ky_colors(n, alpha = 1)
+ky_colors(n, alpha = 1, random = F, ...)
 }
 \arguments{
 \item{n}{the number of colors (<U+FFFD><U+FFFD> 1) to be in the palette.}

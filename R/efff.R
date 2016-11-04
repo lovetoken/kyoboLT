@@ -8,11 +8,10 @@
 #' efff(returns, rg = .01, rfr = .001)
 
 efff <- function(returns, rg = NA, rfr = 0, short = "no", max.allocation = NULL, risk.premium.up = .9,
-                 risk.increment = .0001, plot.only.efff = T, plotly = F){
+                 risk.increment = .0001, plot.only.efff = F, plotly = T){
 
   ## pre
   stopifnot(require(quadprog)); stopifnot(require(dplyr)); stopifnot(require(ggplot2)); stopifnot(require(plotly));
-
 
   ## content : origen code >> `eff.frontier()`
   returns <- returns - rfr
@@ -97,10 +96,12 @@ efff <- function(returns, rg = NA, rfr = 0, short = "no", max.allocation = NULL,
     theme(plot.title = element_text(size = rel(1.4)))
 
   ## return
-
-  if(plotly) p <- ggplotly(p); print(p)
   attr(res, "poolset") <- pool %>% tbl_df
   attr(res, "plot") <- p
+  if(plotly){
+    p <- ggplotly(p)
+    attr(res, "plotly") <- p
+  }; print(p)
   return(res)
 
 }

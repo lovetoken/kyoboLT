@@ -1,12 +1,12 @@
 Package: kyoboLT
 Type: Package
 Title: Useful R package for kyobo retirement pension marketing team
-Version: 0.1.0.0095
+Version: 0.1.0.0096
 Author: Hyojin Song
 Maintainer: Hyojin Song <lt.lovetoken@gmail.com>
 Description: Useful R package for kyobo retirement pension marketing team
 Depends: R (>= 3.2.0)
-Imports: dplyr, reshape2, xts, lubridate, ggplot2, quadprog, psych, formattable, extrafont, plotly, ggrepel, waffle
+Imports: dplyr, reshape2, xts, lubridate, ggplot2, quadprog, psych, formattable, plotly, ggrepel, waffle
 License: GPL-3
 LazyData: TRUE
 RoxygenNote: 5.0.1
